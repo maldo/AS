@@ -4,13 +4,25 @@ var https = require('https');
 var config = require('./config/config');
 var dust = require('dustjs-linkedin');
 var cons = require('consolidate');
+var path = require('path');
 var winston = require('winston');
+var passport = require('passport');
 
 // Self signed credentials
 var credentials = {
     key: fs.readFileSync( __dirname +'/cert/keys/server.key').toString(),
     cert: fs.readFileSync( __dirname +'/cert/certs/server.crt').toString()
 };
+
+var logger = module.exports = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({
+      colorize: true
+    })
+  ],
+  levels: config.winston.levels,
+  colors: config.winston.colors
+});
 
 var app = express();
 
@@ -24,16 +36,27 @@ app.configure(function() {
 	app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 
 	app.use(express.cookieParser());
+	//app.use(express.cookieSession({ secret: 'that\'s a real secret' }));
 	app.use(express.session({ secret: 'that\'s a real secret' }));
 
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	// Initialize Passport!  Also use passport.session() middleware, to support
 	// persistent login sessions (recommended).
+	app.use(passport.initialize());
+	app.use(passport.session());
 	app.use(app.router);
 });
 
-require('./lib/routes/home')(app);
+var RouteDir = './lib/routes';
+var files = fs.readdirSync(RouteDir);
+
+files.forEach(function (file) {
+	var filePath = path.resolve('./', RouteDir, file);
+	logger.verbose(filePath);
+	require(filePath)(app);
+});
 
 https.createServer(credentials, app).listen(config.app.port);
-winston.info('Listening on port '+ config.app.port);
+logger.info('Running on server '+ config.app.host);
+logger.info('Listening on port '+ config.app.port);
