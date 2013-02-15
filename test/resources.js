@@ -25,11 +25,11 @@ describe('Testing registered Resources', function () {
 					res.on('end', function() {
 						var endpoints = JSON.parse(resData);
 						//console.log(util.inspect(endpoints));
-						endpoints.should.have.deep.property("user_endpoint", "https://localhost:8443/AM/oauth/grant");
-						endpoints.should.have.deep.property("introspection_endpoint", "https://localhost:8443/AM/uma/rptstat");
-						endpoints.should.have.deep.property("token_endpoint", "https://localhost:8443/AM/oauth/token");
+						endpoints.should.have.deep.property("user_endpoint", "https://sasimi.safelayer.lan:9980oauth/grant");
+						endpoints.should.have.deep.property("introspection_endpoint", "https://sasimi.safelayer.lan:9980uma/rptstat");
+						endpoints.should.have.deep.property("token_endpoint", "https://sasimi.safelayer.lan:9980oauth/token");
 						endpoints.should.have.property("pat_grant_types_supported").include("authorization_code");
-						endpoints.should.have.deep.property("resource_set_registration_endpoint", "https://localhost:8443/AM/uma/rsreg");
+						endpoints.should.have.deep.property("resource_set_registration_endpoint", "https://sasimi.safelayer.lan:9980uma/rsreg");
 						endpoints.should.have.deep.property("pat_profiles_supported").include("bearer");
 					});					
 
@@ -52,11 +52,10 @@ describe('Testing registered Resources', function () {
 		});
 
 		it('logins into the AM with a valid login', function (done) {
-			agent //https://localhost:8443/AM/?0-1.IFormSubmitListener-form
-				.post(route.server)
-				.query(route.loginPost)
-				.send('userId=example1')
-				.send('userPass=1234')
+			agent 
+				.post(route.server+route.loginPost)
+				.send({username : "example1"})
+				.send({password : "1234"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
