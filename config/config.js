@@ -12,6 +12,7 @@ config.redis.port = 6379;
 
 config.app.port = process.env.PORT || 9980;
 config.app.host = require('os').hostname()+'.safelayer.lan';
+config.app.server = 'https://'+config.app.host+':'+config.app.port+'/';
 
 config.github.client_id = "07108f2c340bbb614344";
 config.github.client_secret = "5692398efed9337bbb437a94e1601f6497199d81";

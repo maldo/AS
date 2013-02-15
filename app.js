@@ -58,5 +58,6 @@ files.forEach(function (file) {
 });
 
 https.createServer(credentials, app).listen(config.app.port);
+logger.info('Version '+ require('./package').version);
 logger.info('Running on server '+ config.app.host);
 logger.info('Listening on port '+ config.app.port);

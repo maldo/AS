@@ -1,0 +1,157 @@
+var should = require('chai').should();
+var util = require('util');
+var route = require('./route');
+var Browser = require('zombie');
+var log = require('./log.js');
+var superagent = require('superagent');
+
+var browser;
+var path;
+
+describe('Login \'Sign with github\' test:', function () {
+	
+	before(function (done) {
+		browser = new Browser();
+ 		browser.runScripts = false;		
+ 		browser.on("error", function(error) {
+ 			console.error(error);
+ 		});
+ 		browser
+ 			.visit('https://github.com/login')
+ 			.then(function() {
+ 				//console.log(browser.html());
+ 				console.log(1);
+
+ 				/*var iniToken = browser.html().indexOf('authenticity_token');
+ 				var algo = browser.html().slice(iniToken, iniToken+100);
+ 				console.log(algo);
+ 				var token = algo.slice(-44,-1)+'=';
+
+
+
+ 				var agent = superagent.agent();
+	 			agent
+					.post('https://github.com/session')
+					.send('login=aliceflextest')
+					.send('password=demodemo1')
+					.send('authenticity_token='+token)
+					.send('commit=Sign+in')
+					.end(function (req, res) {
+						console.log(util.inspect(res));
+						
+						done();
+					});*/
+
+ 				browser.fill('login','aliceflextest');
+ 				browser.fill('password','demodemo1');
+ 				return browser.pressButton('Sign in');
+ 			})
+ 			.then(function () { 
+ 				console.log(2);
+ 				return browser.visit('https://github.com/settings/applications', {"runScripts" : true});
+ 			})
+ 			.then(function () {
+ 				console.log(3);
+ 				console.log(browser.html());
+ 				return browser.clickLink('a.js-remove-item.minibutton.danger');
+ 				//:input[name=email]
+ 				
+ 				//var link = browser.document.querySelector("a[class*=js-remove-item]");
+ 				//return browser.clickLink(link); 
+ 			})
+ 			.then(function () {
+ 				console.log(4);
+ 				console.log(browser.html());
+ 				//return browser.visit('https://github.com/settings/connections/1621347');
+ 			})
+ 			.then(done, done);
+ 			var agent = superagent.agent();
+ 			agent
+				.get('https://github.com/login')
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+
+					var iniToken = res.text.indexOf('authenticity_token');
+	 				var algo = res.text.slice(iniToken, iniToken+100);
+	 				//console.log(algo);
+	 				//var token = algo.slice(-44,-1)+'%3D';
+	 				var token = algo.slice(-44,-1)+'=';
+	 				console.log(token);
+					
+	 				agent
+						.post('https://github.com/session')
+						.type('form')
+						.send({authenticity_token: token})
+						.send({login:'aliceflextest'})
+						.send({password:'demodemo1'})
+						.send({commit:'Sign+in'})
+						.end(function (req, res) {
+							console.log(util.inspect(res.req));
+							
+							done();
+						});
+				});
+
+	});
+
+	it('loads the github login page', function (done) {
+ 		browser = new Browser();
+ 		browser.runScripts = false;		
+ 		browser.on("error", function(error) {
+ 			console.error(error);
+ 		});
+ 		browser
+ 			.visit(route.server/*, {"debug" : true}*/)
+ 			.then(function() {
+ 				return browser.pressButton("button"/*,{"debug" : true, "runScripts" : false}*/);
+ 			})
+ 			.then(function () { 
+ 				path = browser.location.href;
+ 				//console.log(path);
+ 				//console.log(browser.html());
+ 				browser.html().should.contain('safelayer.lan%3A9980%2Fauth%2Fgithub%2Fcallback');
+ 			})
+ 			.then(done, done);
+	});
+
+	it('logs in to github', function (done) {
+ 		browser
+ 			.visit(path/*,{"debug" : true, "runScripts" : false}*/)
+ 			.then(function() {
+ 				//console.log(browser.html());
+ 				browser.fill('login','aliceflextest');
+ 				browser.fill('password','demodemo1');
+ 				return browser.pressButton('Sign in');
+ 			})
+ 			.then(function () {
+				//console.log(browser.text());
+				//console.log(browser.html());
+
+				path = browser.location.href;
+
+				browser.text("title").should.have.string('Authorize access to your account');
+				browser.text().should.contain('Authorize Authorization Server?');
+				browser.html().should.contain('safelayer.lan:9980/auth/github/callback');
+ 			})
+ 			.then(done, done);
+	});
+
+	it('authorizes the app', function (done) {
+ 		browser
+ 			.visit(path/*,{"debug" : true, "runScripts" : false}*/)
+ 			.then(function() {
+ 				return browser.pressButton('Authorize app');
+ 				//return browser.pressButton('authorize');
+ 				//return browser.pressButton('button.button.primary');
+ 			})
+ 			.then(function () {
+				//console.log(browser.text());
+				browser.text("title").should.have.string('Authorization Server');
+				path = browser.location.href;
+				path.should.have.string(route.server+route.userPage);
+				browser.html().should.have.string('alice.flex.test@gmail.com');
+ 			})
+ 			.then(done, done);
+	});
+
+});
