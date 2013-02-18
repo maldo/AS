@@ -1,31 +1,32 @@
 {
-	"name": "AS",
-	"version": "0.1.0",
-	"description": "Authorization Server",
-	"main": "app.js",
-	"scripts": {
-		"start": "node app.js",
-		"test": "mocha test -R spec -t 3000"
-	},
-	"repository": "",
-	"author": "",
-	"license": "BSD",
-	"dependencies": {
-		"express": "~3.1.0",
-		"dustjs-linkedin": "~1.2.0",
-		"consolidate": "~0.8.0",
-		"winston": "~0.6.2",
-		"passport": "~0.1.15",
-		"passport-github": "~0.1.3"
-	},
-	"devDependencies": {
-		"mocha": "*",
-		"chai": "*",
-		"superagent": "*",
-		"zombie": "*",
-		"passport-oauth":"*"
-	},
-	"engines": {
-		"node": "0.8.x"
-	}
+  "name": "AS",
+  "version": "0.1.0",
+  "description": "Authorization Server",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha test -R spec -t 3000"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.1.0",
+    "dustjs-linkedin": "~1.2.0",
+    "consolidate": "~0.8.0",
+    "winston": "~0.6.2",
+    "passport": "~0.1.15",
+    "passport-github": "~0.1.3",
+    "oauth2orize": "~0.1.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "superagent": "*",
+    "zombie": "*",
+    "passport-oauth": "*"
+  },
+  "engines": {
+    "node": "0.8.x"
+  }
 }
