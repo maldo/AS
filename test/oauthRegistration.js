@@ -7,6 +7,7 @@ var co = require('./const');
 require('./clientServer');
 
 var agent;
+var tid;
 
 describe('Testing Oauth', function () {
 
@@ -31,11 +32,16 @@ describe('Testing Oauth', function () {
 
 		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
 			agent
-				.post(route.server+route.loginPost)
+				.post(route.server+'login')
 				.send({username : "example1"})
 				.send({password : "1234"})
 				.end(function (req, res) {
-					//console.log(util.inspect(res));
+					//console.log(util.inspect(res.text));
+
+					var iniToken = res.text.indexOf('transaction_id');
+	 				var algo = res.text.slice(iniToken, iniToken+46);
+	 				tid = algo.slice(-9,-1);
+
 					res.should.have.property('statusCode').that.equals(200);
 					should.exist(res['redirects']);
 					res['text'].should.have.string('Allow');
@@ -47,8 +53,10 @@ describe('Testing Oauth', function () {
 		});
 
 		it('denies the access to the AM server and redirects you out', function (done){
-			agent //https://localhost:8443/AM/wicket/page?2-1.ILinkListener-linkAllow
-				.get(route.server)
+			agent
+				.post('https://sasimi.safelayer.lan:9980/dialog/authorize/decision')
+				.send({transaction_id : tid})
+				.send({cancel : "Deny"})
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					should.exist(res['text']);
@@ -89,7 +97,7 @@ describe('Testing Oauth', function () {
 		});
 	});
 
-	describe('RPT Token', function () {
+	/*describe('RPT Token', function () {
 
 		// usar accessToken discriminado por clientID
 
@@ -178,10 +186,10 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-	});
+	});*/
 });
 
-describe('Register a Resource', function (){
+/*describe('Register a Resource', function (){
 
 	before(function (done) {
 		agent = superagent.agent();
@@ -240,4 +248,4 @@ describe('Register a Resource', function (){
 			});
 	});
 
-});
+});*/
