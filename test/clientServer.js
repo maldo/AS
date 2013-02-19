@@ -5,7 +5,7 @@ var log = require('./log.js');
 var passport = require('passport');
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var co = require('./const');
-
+var config = require('../config/endpoints');
 
 var fs = require('fs');
 var https = require('https');
@@ -17,10 +17,10 @@ var credentials = {
 };
 
 passport.use('AM', new OAuth2Strategy({
-	authorizationURL: 'https://localhost:8443/AM/oauth/grant',
-	tokenURL: 'https://localhost:8443/AM/oauth/token',
+	authorizationURL: config.user_endpoint,
+	tokenURL: config.token_endpoint,
 	clientID: co.CLIENT_ID,
-	clientSecret: 'host1secret',
+	clientSecret: co.CLIENT_SECRET,
 	callbackURL: 'https://localhost:4321/oauth/AM/callback'
 	},
 	function (accessToken, refreshToken, profile, done) {

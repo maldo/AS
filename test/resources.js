@@ -25,8 +25,8 @@ describe('Testing registered Resources', function () {
 					res.on('end', function() {
 						var endpoints = JSON.parse(resData);
 						//console.log(util.inspect(endpoints));
-						endpoints.should.have.deep.property("user_endpoint", "https://sasimi.safelayer.lan:9980oauth/grant");
-						endpoints.should.have.deep.property("introspection_endpoint", "https://sasimi.safelayer.lan:9980uma/rptstat");
+						endpoints.should.have.deep.property("user_endpoint", "https://sasimi.safelayer.lan:9980/oauth/grant");
+						endpoints.should.have.deep.property("introspection_endpoint", "https://sasimi.safelayer.lan:9980/uma/rptstat");
 						endpoints.should.have.deep.property("token_endpoint", "https://sasimi.safelayer.lan:9980oauth/token");
 						endpoints.should.have.property("pat_grant_types_supported").include("authorization_code");
 						endpoints.should.have.deep.property("resource_set_registration_endpoint", "https://sasimi.safelayer.lan:9980uma/rsreg");

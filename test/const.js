@@ -7,6 +7,7 @@ exports.HOST = HOST;
 exports.PORT = PORT;
 module.exports.RPT;
 module.exports.CLIENT_ID = 'Juma Host';
+module.exports.CLIENT_SECRET = 'host1secret';
 module.exports.ACCESSTOKEN;
 module.exports.rid;
 module.exports.TICKET;

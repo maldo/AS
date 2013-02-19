@@ -1,0 +1,13 @@
+{>index/}
+{<loginoauth}
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div class="hero-unit">
+	<h1>
+	{#oauth}
+		Welcome, {client_id}
+	{/oauth}
+	</h1>
+		<p>Please log in to the Authorization Server</p>
+		<p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+	</div>
+{/loginoauth}

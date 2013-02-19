@@ -1,11 +1,23 @@
-<p>Hi {user.name}</p>
-<p><b>{client.name}</b> is requesting access to your account.</p>
-<p>Do you approve?</p>
-
-<form action="/dialog/authorize/decision" method="post">
-  <input name="transaction_id" type="hidden" value="{transactionID}">
-  <div>
-  <input type="submit" value="Allow" id="allow">
-  <input type="submit" value="Deny" name="cancel" id="deny">
-  </div>
-</form>
+{>home/}
+{<loginoauth}
+	<div class="hero-unit text-center">
+		<h1>
+			{#user}
+				Welcome, {name}
+			{/user}
+		</h1>
+		<p><b>{client.name}</b> is requesting access to your account.</p>
+		<p>Do you approve?</p>
+		<form action="/dialog/authorize/decision" method="post">
+			<input name="transaction_id" type="hidden" value="{transactionID}">
+			<div>
+			<button class="btn btn-large btn-success" type="submit" id="allow">
+				<i class="icon-ok"></i>Allow
+			</button>
+			<button class="btn btn-large btn-danger" type="submit" name="cancel" id="deny">
+				<i class="icon-remove"></i>Deny
+			</button>
+			</div>
+		</form>
+	</div>
+{/loginoauth}

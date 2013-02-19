@@ -6,35 +6,6 @@ var log = require('./log.js');
 var co = require('./const');
 require('./clientServer');
 
-
-//Endpoints of the AM server
-/*{
-	"user_endpoint": "https://localhost:8443/AM/oauth/grant",
-	"introspection_endpoint": "https://localhost:8443/AM/uma/rptstat",
-	"authorization_request_endpoint": "https://localhost:8443/AM/uma/preq",
-	"token_endpoint": "https://localhost:8443/AM/oauth/token",
-	"pat_grant_types_supported": [
-		"authorization_code"
-	],
-	"rpt_endpoint": "https://localhost:8443/AM/uma/rpt",
-	"aat_profiles_supported": [
-		"bearer"
-	],
-	"version": "1.0",
-	"rpt_profiles_supported": [
-		"bearer"
-	],
-	"issuer": "http://www.safelayer.com",
-	"permission_registration_endpoint": "https://localhost:8443/AM/uma/preg",
-	"pat_profiles_supported": [
-		"bearer"
-	],
-	"resource_set_registration_endpoint": "https://localhost:8443/AM/uma/rsreg",
-	"aat_grant_types_supported": [
-		"authorization_code"
-	]
-}*/
-
 var agent;
 
 describe('Testing Oauth', function () {
@@ -52,20 +23,17 @@ describe('Testing Oauth', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res['text'].should.have.string(co.CLIENT_ID);
-					res['text'].should.have.string('Authorization - Oauth log in page');
+					res.should.have.property('text').that.have.string(co.CLIENT_ID);
 					should.exist(res['redirects']);
 					done();
-
 				});
 		});
 
 		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
 			agent
-				.post('https://localhost:8443/AM/wicket/page')
-				.query('0-1.IFormSubmitListener-form')
-				.send('userId=example1')
-				.send('userPass=1234')
+				.post(route.server+route.loginPost)
+				.send({username : "example1"})
+				.send({password : "1234"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -80,8 +48,7 @@ describe('Testing Oauth', function () {
 
 		it('denies the access to the AM server and redirects you out', function (done){
 			agent //https://localhost:8443/AM/wicket/page?2-1.ILinkListener-linkAllow
-				.get('https://localhost:8443/AM/wicket/page')
-				.query('2-1.ILinkListener-linkDeny')
+				.get(route.server)
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					should.exist(res['text']);

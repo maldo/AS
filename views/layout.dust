@@ -11,15 +11,15 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="/css/main.css">
 
         <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
     </head>
@@ -34,20 +34,22 @@
         {/content}
         <div class="container">
 
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            <div class="hero-unit">
-                <h1>
-                    {?user}
-                        {#user}
-                            Welcome, {name}
+            {+loginoauth}
+                <!-- Main hero unit for a primary marketing message or call to action -->
+                <div class="hero-unit">
+                    <h1>
+                        {?user}
+                            {#user}
+                                Welcome, {name}
+                            {/user}
+                        {:else}
+                            Hello Anonymous
                         {/user}
-                    {:else}
-                        Hello Anonymous
-                    {/user}
-                </h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-            </div>
+                    </h1>
+                    <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+                </div>
+            {/loginoauth}
 
             <!-- Example row of columns -->
             <div class="row">
@@ -71,7 +73,12 @@
             <hr>
 
             <footer>
-                <p>&copy; <b>SafeLayer</b> <small>Secure Communications 2013<small></p>
+                <p>
+                    &copy; 
+                    <b>
+                        <span class="label label-info">SafeLayer</span>
+                    </b> <small>Secure Communications 2013<small>
+                </p>
             </footer>
 
         </div> <!-- /container -->
@@ -79,8 +86,8 @@
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>-->
 
-        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="/js/vendor/bootstrap.min.js"></script>
 
-        <script src="js/main.js"></script>
+        <script src="/js/main.js"></script>
     </body>
 </html>
