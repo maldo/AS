@@ -11,10 +11,11 @@
 		<form action="/dialog/authorize/decision" method="post">
 			<input name="transaction_id" type="hidden" value="{transactionID}">
 			<div>
-			<button class="btn btn-large btn-success" type="submit" id="allow">
+
+			<button class="btn btn-large btn-success" value="Allow" type="submit" id="allow">
 				<i class="icon-ok"></i>Allow
 			</button>
-			<button class="btn btn-large btn-danger" type="submit" name="cancel" id="deny">
+			<button class="btn btn-large btn-danger" value="Deny" type="submit" name="cancel" id="deny">
 				<i class="icon-remove"></i>Deny
 			</button>
 			</div>
