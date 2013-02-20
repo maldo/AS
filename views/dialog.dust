@@ -1,5 +1,5 @@
 {>home/}
-{<loginoauth}
+{<mainContent}
 	<div class="hero-unit text-center">
 		<h1>
 			{#user}
@@ -21,4 +21,4 @@
 			</div>
 		</form>
 	</div>
-{/loginoauth}
+{/mainContent}

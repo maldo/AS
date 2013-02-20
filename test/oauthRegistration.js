@@ -72,17 +72,49 @@ describe('Testing Oauth', function () {
 			should.not.exist(co.ACCESSTOKEN);
 		});
 
-		it ('allows the access throw Oauth & gets the code', function (done){
-			agent //https://localhost:8443/AM/wicket/page?2-1.ILinkListener-linkAllow
-				.get('https://localhost:8443/AM/wicket/page')
-				.query('2-1.ILinkListener-linkAllow')
+		it('gets the Oauth web page login of the AM server', function (done) {
+			agent
+				.get(co.SERVER+'/oauth/AM')
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.have.string(co.CLIENT_ID);
+					should.exist(res['redirects']);
+					done();
+				});
+		});
+
+		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
+			agent
+				.post(route.server+'login')
+				.send({username : "example1"})
+				.send({password : "1234"})
+				.end(function (req, res) {
+					//console.log(util.inspect(res.text));
+
+					var iniToken = res.text.indexOf('transaction_id');
+	 				var algo = res.text.slice(iniToken, iniToken+46);
+	 				tid = algo.slice(-9,-1);
+
+					res.should.have.property('statusCode').that.equals(200);
+					should.exist(res['redirects']);
+					res['text'].should.have.string('Allow');
+					res['text'].should.have.string('Deny');
+					res['text'].should.have.string('Log out');
+					done();
+				});
+		});
+
+		it('allows the access throw Oauth & gets the code', function (done){
+			agent
+				.post('https://sasimi.safelayer.lan:9980/dialog/authorize/decision')
+				.send({transaction_id : tid})
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					should.exist(res['text']);
 					var resp = JSON.parse(res.text);
 					//log.error('the code')(resp.code);
 					should.exist(resp.code);
-					//co.CODE = resp.code;
 					done();
 				});
 		});
@@ -92,7 +124,7 @@ describe('Testing Oauth', function () {
 
 
 		it ('checks the Oauth token PAT/AAT', function (){
-			//console.log(ACCESSTOKEN);
+			//console.log(co.ACCESSTOKEN);
 			should.exist(co.ACCESSTOKEN);
 		});
 	});

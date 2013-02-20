@@ -21,7 +21,6 @@
         <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="/css/main.css">
 
-        <!--<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>-->
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -29,12 +28,12 @@
         <![endif]-->
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-        {+content}
+        {+navbar}
             This is the base content.
-        {/content}
+        {/navbar}
         <div class="container">
 
-            {+loginoauth}
+            {+mainContent}
                 <!-- Main hero unit for a primary marketing message or call to action -->
                 <div class="hero-unit">
                     <h1>
@@ -49,7 +48,7 @@
                     <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                     <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
                 </div>
-            {/loginoauth}
+            {/mainContent}
 
             <!-- Example row of columns -->
             <div class="row">
@@ -83,8 +82,8 @@
 
         </div> <!-- /container -->
 
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
         <script src="/js/vendor/bootstrap.min.js"></script>
 
