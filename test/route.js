@@ -7,4 +7,3 @@ module.exports.loginPost = 'login';
 module.exports.userPage = 'home';
 module.exports.logoutPost = 'logout';
 module.exports.AMconfig = '.well-known/uma-configuration';
-

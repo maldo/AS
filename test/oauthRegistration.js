@@ -129,18 +129,16 @@ describe('Testing Oauth', function () {
 		});
 	});
 
-	/*describe('RPT Token', function () {
-
-		// usar accessToken discriminado por clientID
+	describe('RPT Token', function () {
 
 		it ('gets the RPT ticket with an PAT/AAT', function (done){
 			agent 
-				.post('https://localhost:8443/AM/uma/rpt')
+				.post(route.server+'uma/rpt')
 				.set('Authorization', 'Bearer '+ co.ACCESSTOKEN)
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					res.header['content-type'].should.contain('application/json');
-
+					res.should.have.property('statusCode').that.equals(201);
 					should.exist(res.text);
 					var resson = JSON.parse(res.text);
 					co.RPT = resson.rpt;
@@ -152,12 +150,12 @@ describe('Testing Oauth', function () {
 
 		it ('fails to get the RPT ticket, invalid accessToken', function (done){
 			agent
-				.post('https://localhost:8443/AM/uma/rpt')
+				.post(route.server+'uma/rpt')
 				.set('Authorization', 'Bearer invalid')
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					res.should.have.property('statusCode').that.equals(401);
-					var error = 'UMA realm=\"SafeAM\",error=\"invalid_token\",error_description=\"Wrong access token\"';
+					var error = 'UMA realm=\"AS\",error=\"invalid_token\",error_description=\"Wrong access token\"';
 					res.header['www-authenticate'].should.have.string(error);
 					done();
 				});
@@ -218,10 +216,10 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-	});*/
+	});
 });
 
-/*describe('Register a Resource', function (){
+describe('Register a Resource', function (){
 
 	before(function (done) {
 		agent = superagent.agent();
@@ -280,4 +278,4 @@ describe('Testing Oauth', function () {
 			});
 	});
 
-});*/
+});
