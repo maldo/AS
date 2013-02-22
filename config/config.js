@@ -7,7 +7,7 @@ config.github = {};
 config.winston = {};
 
 config.redis.uri;
-config.redis.host = 'hostname';
+config.redis.host = '192.168.6.165';
 config.redis.port = 6379;
 
 config.app.port = process.env.PORT || 9980;

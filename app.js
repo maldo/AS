@@ -7,6 +7,7 @@ var cons = require('consolidate');
 var path = require('path');
 var winston = require('winston');
 var passport = require('passport');
+var RedisStore = require('connect-redis')(express);
 
 // Self signed credentials
 var credentials = {
@@ -37,7 +38,13 @@ app.configure(function() {
 
 	app.use(express.cookieParser());
 	//app.use(express.cookieSession({ secret: 'that\'s a real secret' }));
-	app.use(express.session({ secret: 'that\'s a real secret' }));
+	app.use(express.session({
+			store: new RedisStore({
+				host: config.redis.host,
+				port: config.redis.port
+			}),
+		secret: 'that\'s a real secret' 
+	}));
 
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
