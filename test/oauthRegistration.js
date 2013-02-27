@@ -131,7 +131,7 @@ describe('Testing Oauth', function () {
 
 	describe('RPT Token', function () {
 
-		it ('gets the RPT ticket with an PAT/AAT', function (done){
+		it ('gets the RPT ticket with an AAT', function (done){
 			agent 
 				.post(route.server+'uma/rpt')
 				.set('Authorization', 'Bearer '+ co.ACCESSTOKEN)
@@ -190,9 +190,11 @@ describe('Testing Oauth', function () {
 				.set('Authorization', 'Bearer invalid')
 				.send({rpt:co.RPT})
 				.end(function (req, res) {
-					//log.debug('response')(res);
+					//log.debug('response')(res.headers);
 
-					false.should.be.true;
+					res.should.have.property('statusCode').that.equals(401);
+					var error = 'Bearer realm=\"Users\", error=\"invalid_token\", error_description=\"Wrong access token\"';
+					res.header['www-authenticate'].should.have.string(error);
 					done();
 				});
 		});
@@ -206,6 +208,7 @@ describe('Testing Oauth', function () {
 				.end(function (req, res) {
 					//log.debug('response')(res.header);
 
+					res.header['cache-control'].should.have.string('no-store');
 					should.exist(res.text);
 					var resson = JSON.parse(res.text);
 					//log.debug('response')(resson);
@@ -216,6 +219,24 @@ describe('Testing Oauth', function () {
 				});
 		});
 
+		it ('checks the status of an RPT without RPT', function (done){
+			agent
+				.post(route.server+'uma/rptstat')
+				//.set('Content-Type', 'application/json')
+				.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
+				.end(function (req, res) {
+					//log.debug('response')(res.header);
+					res.header['cache-control'].should.have.string('no-store');
+
+					should.exist(res.text);
+					var resson = JSON.parse(res.text);
+					//log.debug('response')(resson);
+
+					resson.should.have.property('valid').that.is.false;
+					
+					done();
+				});
+		});
 	});
 });
 
