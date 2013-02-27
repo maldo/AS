@@ -163,7 +163,7 @@ describe('Testing Oauth', function () {
 
 		it ('checks the status of a RPT', function (done){
 			agent
-				.post('https://localhost:8443/AM/uma/rptstat')
+				.post(route.server+'uma/rptstat')
 				.set('Content-Type', 'application/json')
 				.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
 				.send({rpt:co.RPT})
@@ -185,7 +185,7 @@ describe('Testing Oauth', function () {
 
 		it ('checks the status of a RPT with an invalid accessToken', function (done){
 			agent
-				.post('https://localhost:8443/AM/uma/rptstat')
+				.post(route.server+'uma/rptstat')
 				.set('Content-Type', 'application/json')
 				.set('Authorization', 'Bearer invalid')
 				.send({rpt:co.RPT})
@@ -199,7 +199,7 @@ describe('Testing Oauth', function () {
 
 		it ('checks the status of an invalid RPT', function (done){
 			agent
-				.post('https://localhost:8443/AM/uma/rptstat')
+				.post(route.server+'uma/rptstat')
 				.set('Content-Type', 'application/json')
 				.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
 				.send({rpt:"this is an invalid RPT"})
