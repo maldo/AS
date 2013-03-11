@@ -42,14 +42,16 @@
                                 Welcome, {name}
                             {/user}
                         {:else}
-                            Hello Anonymous
+                            Authorization Server
                         {/user}
                     </h1>
-                    <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                    <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+                    <p>This is the Authorization Server, from here you can manage your resources and all their policies. Also you can specify all the resources you can share with a requester.</p>
+                    <p>If you don't have an account you can sign up or login through GitHub.</p>
+                    <p><a class="btn btn-primary btn-large" href="/signup">Create an Account &raquo;</a></p>
                 </div>
             {/mainContent}
 
+            {+rows}
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span4">
@@ -68,6 +70,7 @@
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div>
             </div>
+            {/rows}
 
             <hr>
 

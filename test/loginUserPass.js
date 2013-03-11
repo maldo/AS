@@ -22,6 +22,18 @@ describe('Login \'Username:Password\' test:', function () {
 		});
 	});
 
+	describe('GET /login', function () {
+		it('is the login webpage', function (done) {
+			agent
+				.get(route.server+route.loginPost)
+				.end(function (req, res) {
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please Login');
+					done();
+				});
+		});
+	});
+
 	describe('POST with no valid login', function () {
 
 		it('should redirect into the root webpage after incorrect login', function (done) {
@@ -32,8 +44,8 @@ describe('Login \'Username:Password\' test:', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res.should.have.deep.property('redirects[0]').that.equals(route.server);
-					res.should.have.property('text').that.contain('Hello Anonymous');
+					res.should.have.deep.property('redirects[0]').that.contain(route.server);
+					res.should.have.property('text').that.contain('Create an Account');
 					done();
 				});
 		});
@@ -43,7 +55,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.get(route.server+route.userPage)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
-					res['redirects'][0].should.equal(route.server);
+					res['redirects'][0].should.contain(route.server);
 					res['text'].should.not.contain('example1@hotmail.com');
 					done();
 				});
@@ -86,7 +98,7 @@ describe('Login \'Username:Password\' test:', function () {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
 					res.should.have.property('text').that.not.contain('example1@hotmail.com');
-					res.should.have.deep.property('redirects[0]').that.equals(route.server);
+					res.should.have.deep.property('redirects[0]').that.contain(route.server);
 					done();
 				});
 		});

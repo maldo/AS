@@ -29,3 +29,15 @@
             </div>
         </div>
 {/navbar}
+
+{<mainContent}
+    <!-- Main hero unit for a primary marketing message or call to action -->
+    <div class="hero-unit">
+        <h1>
+            {#user}
+                Welcome, {name}
+            {/user}
+        </h1>
+        <p>Control your resources in the different servers.</p>
+    </div>
+{/mainContent}

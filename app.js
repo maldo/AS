@@ -8,13 +8,15 @@ var path = require('path');
 var winston = require('winston');
 var passport = require('passport');
 var RedisStore = require('connect-redis')(express);
+var mongoose = require('mongoose');
 
-// Self signed credentials
+/* Load credentials for https session */
 var credentials = {
     key: fs.readFileSync( __dirname +'/cert/keys/server.key').toString(),
     cert: fs.readFileSync( __dirname +'/cert/certs/server.crt').toString()
 };
 
+/* Initialize Winston Logger */
 var logger = module.exports = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)({
@@ -25,6 +27,12 @@ var logger = module.exports = new (winston.Logger)({
   colors: config.winston.colors
 });
 
+/* MongoDB connection */
+mongoose.connect(config.db.uri, function(err) {
+	if (err) return logger.error('Problem connecting with MongoDB on '+ config.db.uri);
+	logger.info('MongoDB connected on '+ config.db.uri);
+});
+
 var app = express();
 
 app.configure(function() {
@@ -33,7 +41,6 @@ app.configure(function() {
 	app.set('view engine', 'dust');
 
 	app.use(express.static(__dirname + '/public'));
-	// app.use(express.logger());
 	app.use(express.favicon(__dirname + '/public/img/favicon.ico'));
 
 	app.use(express.cookieParser());
@@ -64,6 +71,7 @@ files.forEach(function (file) {
 	require(filePath)(app);
 });
 
+/* Https server creation*/
 https.createServer(credentials, app).listen(config.app.port);
 logger.info('Version '+ require('./package').version);
 logger.info('Running on server '+ config.app.host);
