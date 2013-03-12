@@ -5,6 +5,13 @@
 	<h1>Sign Up</h1>
 </div>
 <div id="login">
+
+	<!--<link rel="stylesheet" href="/css/datepicker.css">
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script>
+		$('#datepicker').datepicker();
+	</script>-->
+
 	<form class="form-horizontal" method="POST" action="/signup">
 		<div class="control-group">
 			<label class="control-label">Name:</label>
@@ -27,9 +34,31 @@
 				<span class="help-inline"></span>
 			</div>
 		</div>
+		<div class="control-group">
+			<label class="control-label">Birthday:</label>
+			<div class="controls">
+				<div class="input-append date" id="datepicker" data-date="dateValue: Customer.DateOfBirth" data-date-format="dd-mm-yyyy">
+					<input size="16" type="text" data-bind="value: Customer.DateOfBirth" readonly="readonly" />
+					<span class="add-on"><i class="icon-calendar"></i></span>
+				</div>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Gender:</label>
+			<div class="controls">
+				<label class="radio inline">
+  					<input type="radio" name="gender" id="optionsRadios1" value="male" checked>
+  							Male
+				</label>
+				<label class="radio inline">
+ 					 <input type="radio" name="gender" id="optionsRadios2" value="female">
+							Female
+				</label>
+			</div>
+		</div>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Create</button>
-			</div>
+		</div>
 	</form>
 </div>
 

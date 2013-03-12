@@ -20,6 +20,7 @@
         </style>
         <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
         <link rel="stylesheet" href="/css/main.css">
+        <!--<link rel="stylesheet" href="/css/datepicker.css">-->
 
     </head>
     <body>
@@ -91,5 +92,6 @@
         <script src="/js/vendor/bootstrap.min.js"></script>
 
         <script src="/js/main.js"></script>
+        <!--<script src="/js/bootstrap-datepicker.js"></script>-->
     </body>
 </html>
