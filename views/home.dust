@@ -38,6 +38,6 @@
                 Welcome, {name}
             {/user}
         </h1>
-        <p>Control your resources in the different servers.</p>
+        <p>Control your resources in different servers.</p>
     </div>
 {/mainContent}

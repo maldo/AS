@@ -39,7 +39,7 @@ describe('Login \'Username:Password\' test:', function () {
 		it('should redirect into the root webpage after incorrect login', function (done) {
 			agent
 				.post(route.server+route.loginPost)
-				.send({username : "example1"})
+				.send({email : "example1@mail.com"})
 				.send({password : "wrongpassword"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
@@ -56,7 +56,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res['redirects'][0].should.contain(route.server);
-					res['text'].should.not.contain('example1@hotmail.com');
+					res['text'].should.not.contain('example1@mail.com');
 					done();
 				});
 		});
@@ -67,13 +67,13 @@ describe('Login \'Username:Password\' test:', function () {
 		it('logins into the AM with a valid login', function (done) {
 			agent
 				.post(route.server+route.loginPost)
-				.send({username : "example1"})
+				.send({email : "example1@mail.com"})
 				.send({password : "1234"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
 					res.should.have.deep.property('redirects[0]').that.equals(route.server+route.userPage);
-					res.should.have.property('text').that.contain('example1@hotmail.com');
+					res.should.have.property('text').that.contain('example1@mail.com');
 					res.should.have.property('text').that.contain('Log out');
 					done();
 				});
@@ -84,7 +84,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.get(route.server+route.userPage)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
-					res.should.have.property('text').that.contain('example1@hotmail.com');
+					res.should.have.property('text').that.contain('example1@mail.com');
 					res.should.have.property('redirects').that.is.empty;
 					done();
 				});
@@ -97,7 +97,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res.should.have.property('text').that.not.contain('example1@hotmail.com');
+					res.should.have.property('text').that.not.contain('example1@mail.com');
 					res.should.have.deep.property('redirects[0]').that.contain(route.server);
 					done();
 				});
@@ -111,7 +111,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res.should.have.property('text').that.not.contain('example1@hotmail.com');
+					res.should.have.property('text').that.not.contain('example1@mail.com');
 					done();
 				});
 		});

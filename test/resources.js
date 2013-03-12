@@ -54,13 +54,13 @@ describe('Testing registered Resources', function () {
 		it('logins into the AM with a valid login', function (done) {
 			agent 
 				.post(route.server+route.loginPost)
-				.send({username : "example1"})
+				.send({username : "example1@mail.com"})
 				.send({password : "1234"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
 					res['redirects'][0].should.have.string(route.server+route.userPage);
-					res['text'].should.contain('example1@hotmail.com');
+					res['text'].should.contain('example1@mail.com');
 					res['text'].should.contain('Log out');
 					done();
 				});
@@ -74,7 +74,7 @@ describe('Testing registered Resources', function () {
 					res.should.have.property('statusCode').that.equals(200);
 					res['redirects'][0].should.have.string(route.server+route.userPage);
 					res.should.have.property('text');
-					res['text'].should.contain('example1@hotmail.com');
+					res['text'].should.contain('example1@mail.com');
 					res['text'].should.contain('Log out');
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
 					res['text'].should.contain('Resource Name');
@@ -105,7 +105,7 @@ describe('Testing registered Resources', function () {
 					res.should.have.property('statusCode').that.equals(200);
 					res['redirects'][0].should.have.string(route.server+route.userPage);
 					res.should.have.property('text');
-					res['text'].should.contain('example1@hotmail.com');
+					res['text'].should.contain('example1@mail.com');
 					res['text'].should.contain('Log out');
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
 					res['text'].should.contain('Resource Name');
