@@ -29,7 +29,7 @@ var logger = module.exports = new (winston.Logger)({
 
 /* MongoDB connection */
 mongoose.connect(config.db.uri, function(err) {
-	if (err) return logger.error('Problem connecting with MongoDB on '+ config.db.uri);
+	if (err) return logger.error('Problem connecting with MongoDB on '+ config.db.uri+'\nError: '+err);
 	logger.info('MongoDB connected on '+ config.db.uri);
 });
 

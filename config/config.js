@@ -13,7 +13,10 @@ config.security = {};
 config.db.host = 'localhost';
 config.db.port = 27017;
 config.db.database = 'as';
+config.db.user = 'root';
+config.db.password = '123456';
 config.db.uri = 'mongodb://'+config.db.host+':'+config.db.port+'/'+config.db.database;
+
 
 /************************************************************************/
 /*							Redis Configuration							*/
@@ -30,8 +33,10 @@ config.app.server = 'https://'+config.app.host+':'+config.app.port;
 
 /************************************************************************/
 /*							Security Configuration						*/
-config.security.passwordHash = 'sha512';
-config.security.randomCryptoLength = 16;
+config.security.passwordHash = 'sha256';
+config.security.userUidLength = 16;
+config.security.tokenLength = 32;
+config.security.codeLength = 8;
 
 /************************************************************************/
 /*							Github Configuration						*/
