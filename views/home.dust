@@ -12,7 +12,7 @@
                     <a class="brand" href="#">Authotization Server</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
+                            <li class="active"><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
                             <li><a href="/account">Account</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
