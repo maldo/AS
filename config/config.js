@@ -25,11 +25,13 @@ config.redis.port = 6379;
 config.redis.ttl = 3600;
 config.redis.ttlCode = 120;
 
+
 /************************************************************************/
 /*							Application Configuration					*/
 config.app.port = process.env.PORT || 9980;
 config.app.host = require('os').hostname()+'.safelayer.lan';
 config.app.server = 'https://'+config.app.host+':'+config.app.port;
+
 
 /************************************************************************/
 /*							Security Configuration						*/
@@ -38,11 +40,13 @@ config.security.userUidLength = 16;
 config.security.tokenLength = 32;
 config.security.codeLength = 8;
 
+
 /************************************************************************/
 /*							Github Configuration						*/
 config.github.client_id = "07108f2c340bbb614344";
 config.github.client_secret = "5692398efed9337bbb437a94e1601f6497199d81";
 config.github.callback_url = 'https://'+config.app.host+':'+config.app.port+'/auth/github/callback';
+
 
 /************************************************************************/
 /*							Winston Logger Configuration				*/

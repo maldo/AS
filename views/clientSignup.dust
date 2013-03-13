@@ -1,0 +1,46 @@
+{>index/}
+{<mainContent}
+
+<div class="page-header">
+	<h1>Sign Up</h1>
+	<p>Once you have your account, we will provide you with the tokens. Remenber we provide our information as UMA protocol said.</p>
+</div>
+<div id="login">
+
+	<!--<link rel="stylesheet" href="/css/datepicker.css">
+	<script src="/js/bootstrap-datepicker.js"></script>
+	<script>
+		$('#datepicker').datepicker();
+	</script>-->
+
+	<form class="form-horizontal" method="POST" action="/client/signup">
+		<div class="control-group">
+			<label class="control-label">Client's Name:</label>
+				<div class="controls">
+					<input type="text" name="name"/>
+					<span class="help-inline"></span>
+				</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Email:</label>
+			<div class="controls">
+				<input type="email" name="email"/>
+				<span class="help-inline"></span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Password:</label>
+			<div class="controls">
+				<input type="password" name="password"/>
+				<span class="help-inline"></span>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Create</button>
+		</div>
+	</form>
+</div>
+
+{/mainContent}
+{<rows}
+{/rows}

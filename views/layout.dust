@@ -56,9 +56,9 @@
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                    <h2>Resource provider? client?</h2>
+                    <p>Authorization Server can work for you, with our UMA implementation on the Cloud, we are able to manage your resources fast and provide for them a set of policies</p>
+                    <p><a class="btn btn-info" href="/client/signup">Try it for free &raquo;</a></p>
                 </div>
                 <div class="span4">
                     <h2>Heading</h2>

@@ -20,9 +20,9 @@
                             <button type="submit" class="btn">Log out</button>
                         </form>
                         <ul class="nav pull-right">
-                            {#user}                 
+                            {#client}                 
                                 <li class="active"><a>{email}</a></li>
-                            {/user}
+                            {/client}
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -31,27 +31,15 @@
 {/navbar}
 
 {<mainContent}
-	<div class="hero-unit text-center">
-		<h1>
-			{#user}
-				Welcome, {name}
-			{/user}
-		</h1>
-		<p><b>{client.name}</b> is requesting access to your account.</p>
-		<p>Do you approve?</p>
-		<form action="/dialog/authorize/decision" method="post">
-			<input name="transaction_id" type="hidden" value="{transactionID}">
-			<div>
-
-			<button class="btn btn-large btn-success" value="Allow" type="submit" id="allow">
-				<i class="icon-ok"></i>Allow
-			</button>
-			<button class="btn btn-large btn-danger" value="Deny" type="submit" name="cancel" id="deny">
-				<i class="icon-remove"></i>Deny
-			</button>
-			</div>
-		</form>
-	</div>
+    <div class="hero-unit">
+        <h1>
+            {#client}
+                Welcome, {name}
+            {/client}
+        </h1>
+		<p>Your <b>clientid</b> is: {#client}{clientId}{/client}</p>
+		<p>Your <b>clientSecret</b> is: {#client}{clientSecret}{/client}</p>
+    </div>
 {/mainContent}
 
 {<rows}
