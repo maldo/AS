@@ -51,13 +51,13 @@ describe('Login \'Username:Password\' test:', function () {
 				});
 		});
 
-		it('should go to the root page after triyng to access the userPage when no log in', function (done){
+		it('should go to the root page after triyng to access the /home when no log in', function (done){
 			agent
 				.get(route.home)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
-					res['redirects'][0].should.contain(route.server);
-					res['text'].should.not.contain(co.EMAIL);
+					res.should.have.deep.property('redirects[0]').that.contain(route.server);
+					res.should.have.property('text').that.not.contain(co.EMAIL);
 					done();
 				});
 		});
@@ -105,7 +105,7 @@ describe('Login \'Username:Password\' test:', function () {
 		});
 	});
 
-	describe('Trying to access to GET the main page', function () {
+	describe('Trying to access the main page', function () {
 		it('should deny access to the user page after log out', function (done) {
 			agent
 				.get(route.home)
