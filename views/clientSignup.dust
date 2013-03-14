@@ -7,32 +7,39 @@
 </div>
 <div id="login">
 
-	<!--<link rel="stylesheet" href="/css/datepicker.css">
-	<script src="/js/bootstrap-datepicker.js"></script>
-	<script>
-		$('#datepicker').datepicker();
-	</script>-->
+	{#dbkey}
+		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{dbkey}
+		</div>
+	{/dbkey}
 
 	<form class="form-horizontal" method="POST" action="/client/signup">
 		<div class="control-group">
 			<label class="control-label">Client's Name:</label>
 				<div class="controls">
 					<input type="text" name="name"/>
-					<span class="help-inline"></span>
+					{#name}
+						<span class="help-inline alert alert-error">{name}</span>
+					{/name}
 				</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">Email:</label>
 			<div class="controls">
 				<input type="email" name="email"/>
-				<span class="help-inline"></span>
+				{#email}
+					<span class="help-inline alert alert-error">{email}</span>
+				{/email}
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">Password:</label>
 			<div class="controls">
 				<input type="password" name="password"/>
-				<span class="help-inline"></span>
+				{#password}
+					<span class="help-inline alert alert-error">{password}</span>
+				{/password}
 			</div>
 		</div>
 		<div class="form-actions">
