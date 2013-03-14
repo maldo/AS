@@ -9,4 +9,6 @@ module.exports.logout = this.server +'/logout';
 module.exports.signup = this.server + '/signup';
 module.exports.ASconfig = this.server+'/.well-known/uma-configuration';
 module.exports.clientSignup = this.server + '/client/signup';
+module.exports.clientLogin = this.server + '/client/login';
+module.exports.clientLogout = this.server + '/client/logout';
 module.exports.client = this.server + '/client';
