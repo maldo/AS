@@ -27,9 +27,10 @@ describe('Register a new Client test:', function () {
 			agent
 				.get(route.clientSignup)
 				.end(function (req, res) {
+					//console.log(res);
 					res.should.have.property('statusCode').that.equals(200);
 					res.should.have.property('text').that.contain('Sign Up');
-					res.should.have.property('text').that.contain('UMA protocol');
+					res.should.have.property('text').that.contain('User Managed Access');
 					done();
 				});
 		});

@@ -39,7 +39,17 @@
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label">Password:</label>
+			<label class="control-label"> 
+				<a href="" rel="tooltip" title="Password should have:
+* no white-space characters
+* minimum length of 8
+* makes sure there is at least:
+	+ one non-alpha character
+	+ one upper case character
+	+ one lower case character">
+					<i class="icon-info-sign"></i>
+				</a> Password:
+			</label>
 			<div class="controls">
 				<input type="password" name="password"/>
 				{#password}
