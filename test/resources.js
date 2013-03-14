@@ -12,10 +12,10 @@ describe('Testing registered Resources', function () {
 		done();
 	});
 
-	describe('GET AM configuration', function () {
-		it('gets the AM endpoints configuration', function (done) {
+	describe('GET the AS configuration', function () {
+		it('gets the AS endpoints configuration', function (done) {
 			agent
-				.get(route.server+route.AMconfig)
+				.get(route.ASconfig)
 				.end(function (req, res) {
 					var resData='';
 					res.on('data', function(chunk) {
@@ -51,16 +51,16 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('logins into the AM with a valid login', function (done) {
+		it('logins into the AM', function (done) {
 			agent 
-				.post(route.server+route.loginPost)
-				.send({username : "example1@mail.com"})
-				.send({password : "1234"})
+				.post(route.login)
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res['redirects'][0].should.have.string(route.server+route.userPage);
-					res['text'].should.contain('example1@mail.com');
+					res['redirects'][0].should.have.string(route.home);
+					res['text'].should.contain(co.EMAIL);
 					res['text'].should.contain('Log out');
 					done();
 				});

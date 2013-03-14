@@ -32,9 +32,9 @@ describe('Testing Oauth', function () {
 
 		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
 			agent
-				.post(route.server+'/login')
-				.send({email : "example1@mail.com"})
-				.send({password : "1234"})
+				.post(route.login)
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
 				.end(function (req, res) {
 					//console.log(util.inspect(res.text));
 
@@ -86,9 +86,9 @@ describe('Testing Oauth', function () {
 
 		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
 			agent
-				.post(route.server+'/login')
-				.send({email : "example1@mail.com"})
-				.send({password : "1234"})
+				.post(route.login)
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
 				.end(function (req, res) {
 					//console.log(util.inspect(res.text));
 
