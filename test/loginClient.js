@@ -61,11 +61,26 @@ describe('Login \'Client:Password\' test:', function () {
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
 				.end(function (req, res) {
-					//console.log(util.inspect(res));
+					//console.log(util.inspect(res.text));
 					res.should.have.property('statusCode').that.equals(200);
 					res.should.have.deep.property('redirects[0]').that.equals(route.client);
 					res.should.have.property('text').that.contain(co.EMAIL);
 					res.should.have.property('text').that.contain('Log out');
+					res.should.have.property('text').that.contain('Client ID');
+					res.should.have.property('text').that.contain('Client Secret');
+
+					var initid = res.text.indexOf('Client ID');
+					var span = res.text.indexOf('</span>', initid);
+					var clid = res.text.slice((span-16),span);
+
+					co.CLIENT_ID = clid;
+
+					initid = res.text.indexOf('Client Secret');
+					span = res.text.indexOf('</span>', initid);
+					var clis = res.text.slice((span-32),span);
+
+					co.CLIENT_SECRET = clis;
+
 					done();
 				});
 		});

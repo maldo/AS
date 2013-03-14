@@ -47,5 +47,6 @@ describe('Test the Validation functions', function(){
 
 		validate.password('12345Aa%').should.be.true
 		validate.password('!aAc&gt<23#').should.be.true
+		validate.password('@aA12345').should.be.true
 	})
 });

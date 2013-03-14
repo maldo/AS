@@ -38,12 +38,12 @@
             {/client}
         </h1>
         </br>
-		<p>Your <strong>clientid</strong> is: 
+		<p>Your <strong>Client ID</strong> is: 
             <span class="label label-important" style="font-size: 16px;">
                {#client}{clientId}{/client}
             </span>
         </p>
-		<p>Your <strong>clientSecret</strong> is: 
+		<p>Your <strong>Client Secret</strong> is: 
             <span class="label label-important" style="font-size: 16px;">
                 {#client}{clientSecret}{/client}
             </span>

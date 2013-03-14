@@ -4,7 +4,6 @@ var route = require('./route');
 var superagent = require('superagent');
 var log = require('./log.js');
 var co = require('./const');
-require('./clientServer');
 
 var agent;
 var tid;
@@ -13,6 +12,7 @@ describe('Testing Oauth', function () {
 
 	before(function (done) {
 		agent = superagent.agent();
+		require('./clientServer.es');
 		done();
 	});
 
