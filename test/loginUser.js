@@ -73,7 +73,7 @@ describe('Login \'Username:Password\' test:', function () {
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res.should.have.deep.property('redirects[0]').that.equals(route.home);
+					res.should.have.deep.property('redirects[0]').that.contain(route.home);
 					res.should.have.property('text').that.contain(co.EMAIL);
 					res.should.have.property('text').that.contain('Log out');
 					done();
@@ -87,6 +87,17 @@ describe('Login \'Username:Password\' test:', function () {
 					//console.log(util.inspect(res));
 					res.should.have.property('text').that.contain(co.EMAIL);
 					res.should.have.property('redirects').that.is.empty;
+					done();
+				});
+		});
+
+		it('stays inside a session after a login', function (done) {
+			agent
+				.get(route.login)
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('text').that.contain(co.EMAIL);
+					res.should.have.deep.property('redirects[0]').that.contain(route.home);
 					done();
 				});
 		});

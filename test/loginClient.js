@@ -96,6 +96,18 @@ describe('Login \'Client:Password\' test:', function () {
 				});
 		});
 
+		it('should redirect into the client webpage if logged', function (done) {
+			agent
+				.get(route.clientLogin)
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.deep.property('redirects[0]').that.contain(route.client);
+					res.should.have.property('text').that.contain(co.CLIENT);
+					done();
+				});
+		});
+
 		it('logs out', function (done) {
 			agent
 				.post(route.clientLogout)
