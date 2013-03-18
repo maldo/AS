@@ -1,6 +1,6 @@
 {
   "name": "AS",
-  "version": "0.2.5",
+  "version": "0.3",
   "description": "Authorization Server",
   "main": "app.js",
   "scripts": {
@@ -20,7 +20,11 @@
     "oauth2orize": "~0.1.0",
     "connect-redis": "~1.4.5",
     "redis": "~0.8.2",
-    "mongoose": "~3.5.7"
+    "mongoose": "~3.5.7",
+    "passport-local": "~0.1.6",
+    "passport-http": "~0.2.1",
+    "passport-oauth2-client-password": "~0.1.0",
+    "passport-http-bearer": "~0.2.1"
   },
   "devDependencies": {
     "mocha": "*",
