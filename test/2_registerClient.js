@@ -17,7 +17,27 @@ describe('Register a new Client test:', function () {
 			//console.log('MongoDB connected on '+ config.db.uri);
 			db.Client.remove({}, function(err) {
     			//console.log('collection dropped');
-    			done();
+
+    			var client = new db.Client({
+    				name: 'UMA HOST',
+					clientId: 'Juma Host',
+					clientSecret: 'host1secret',
+					email: 'juma@host.com',
+					password: 'String',
+					murl: 'String',
+					curl: 'https://localhost:8453/Host/oauth'
+    			});
+    			
+    			client.save(function(err, user_Saved){
+				    if(err){
+				        throw err;
+				        console.log(err);
+				    }else{
+				        console.log('saved!');
+				        done();
+				    }
+				});
+    			
 			});
 		});
 	});
