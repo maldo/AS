@@ -25,6 +25,24 @@
 				</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label">Main URL</label>
+				<div class="controls">
+					<input type="text" name="murl"/>
+					{#murl}
+						<span class="help-inline alert alert-error">{murl}</span>
+					{/murl}
+				</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Callback URL</label>
+				<div class="controls">
+					<input type="text" name="curl"/>
+					{#curl}
+						<span class="help-inline alert alert-error">{curl}</span>
+					{/curl}
+				</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">Email:</label>
 			<div class="controls">
 				<input type="email" name="email"/>

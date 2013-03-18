@@ -44,6 +44,8 @@ describe('Register a new Client test:', function () {
 				.send({name: ''})
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
+				.send({murl : co.MURL})
+				.send({curl : co.CURL})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -58,6 +60,8 @@ describe('Register a new Client test:', function () {
 				.send({name: co.NAME})
 				.send({email : 'This is not an email'})
 				.send({password : co.PASSWORD})
+				.send({murl : co.MURL})
+				.send({curl : co.CURL})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -72,10 +76,44 @@ describe('Register a new Client test:', function () {
 				.send({name: co.NAME})
 				.send({email : co.EMAIL})
 				.send({password : 1})
+				.send({murl : co.MURL})
+				.send({curl : co.CURL})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
 					res.should.have.property('text').that.contain('Please provide a strong password');
+					done();
+				});
+		});
+
+		it('should not register a client with invalid Main URL', function (done){
+			agent
+				.post(route.clientSignup)
+				.send({name: co.NAME})
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
+				.send({murl : ''})
+				.send({curl : co.CURL})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please provide a valid url');
+					done();
+				});
+		});
+
+		it('should not register a client with invalid Callback URL', function (done){
+			agent
+				.post(route.clientSignup)
+				.send({name: co.NAME})
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
+				.send({murl : co.MURL})
+				.send({curl : ''})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please provide a valid url');
 					done();
 				});
 		});
@@ -89,6 +127,8 @@ describe('Register a new Client test:', function () {
 				.send({name: co.CLIENT})
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
+				.send({murl : co.MURL})
+				.send({curl : co.CURL})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -104,6 +144,8 @@ describe('Register a new Client test:', function () {
 				.send({name: co.CLIENT})
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
+				.send({murl : co.MURL})
+				.send({curl : co.CURL})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);

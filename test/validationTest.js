@@ -49,4 +49,34 @@ describe('Test the Validation functions', function(){
 		validate.password('!aAc&gt<23#').should.be.true
 		validate.password('@aA12345').should.be.true
 	})
+
+	it('test the URL validation', function (){
+		validate.url('').should.be.false
+		validate.url('://www.safelayer.com').should.be.false
+		validate.url('ww.safelayer.com').should.be.false
+		validate.url('http@safelayer.com').should.be.false
+		validate.url('wvw.safelayer.com').should.be.false
+		validate.url('http//:wwwsafelayer.com').should.be.false
+		validate.url('http//:www.safelayer.com').should.be.false
+		validate.url('https//:www.safelayer.co.uk').should.be.false
+		validate.url('http//www.safelayer.com').should.be.false
+		validate.url('httpwww.safelayer.com').should.be.false
+		validate.url('http.www.safelayer.com').should.be.false
+		validate.url('http//:.www.safelayer.com').should.be.false
+		validate.url('https//www.safelayer.com#sth/page').should.be.false
+		validate.url('https//www.safelayer.com//sth/page').should.be.false
+		//validate.url('https://www.safelayer.com////sth/page').should.be.false
+		//validate.url('https:///www.safelayer.com/sth/page').should.be.false
+
+
+		validate.url('http://www.safelayer.com').should.be.true
+		validate.url('https://www.safelayer.com').should.be.true
+		//validate.url('www.safelayer.com').should.be.true
+		//validate.url('safelayer.com').should.be.true
+		validate.url('http://safelayer.com').should.be.true
+		validate.url('https://safelayer.com/page/').should.be.true
+		validate.url('https://safelayer.com/page/another').should.be.true
+		validate.url('https://safelayer.com/page/another:3000').should.be.true
+	})
+
 });

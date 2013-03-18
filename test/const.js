@@ -8,10 +8,12 @@ exports.PORT = PORT;
 module.exports.RPT;
 module.exports.CLIENT_ID;
 module.exports.CLIENT_SECRET;
-module.exports.EMAIL = 'example1@mail.com'
+module.exports.EMAIL = 'john@a-team.com'
 module.exports.PASSWORD = '@aA12345';
 module.exports.NAME = 'John Smith';
 module.exports.CLIENT = 'A-TEAM';
+module.exports.MURL = 'https://localhost:4321/oauth/AM';
+module.exports.CURL = 'https://localhost:4321/oauth/AM/callback';
 module.exports.ACCESSTOKEN;
 module.exports.rid;
 module.exports.TICKET;
