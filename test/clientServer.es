@@ -27,7 +27,6 @@ passport.use('AM', new OAuth2Strategy({
 		process.nextTick(function () {
 		 
 			co.ACCESSTOKEN = accessToken;
-			//console.log(accessToken);
 
 			// To keep the example simple, the user's GitHub profile is returned to
 			// represent the logged-in user.  In a typical application, you would want
@@ -103,7 +102,7 @@ app.get('/oauth/AM/callback',
 	passport.authenticate('AM', { failureRedirect: '/fail' }),
 	function (req, res) {
 
-		//log.debug('lo que llega es')(req.query.code);
+		log.debug('lo que llega es')(req.query);
 		res.send(req.query);
 });
 
