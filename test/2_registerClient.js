@@ -4,7 +4,7 @@ var util = require('util');
 var route = require('./route');
 var co = require('./const');
 var mongoose = require('mongoose');
-var config = require('../config/config');
+var config = require('../lib/config/config');
 var db = require('../lib/db');
 
 var agent;

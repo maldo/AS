@@ -1,4 +1,4 @@
-var config = require('../config/config');
+var config = require('../lib/config/config');
 
 //https://hostname.safelayer.lan:9980/
 module.exports.server = config.app.server;

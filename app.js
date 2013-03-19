@@ -1,7 +1,7 @@
 var express = require('express');
 var fs = require('fs');
 var https = require('https');
-var config = require('./config/config');
+var config = require('./lib/config/config');
 var dust = require('dustjs-linkedin');
 var cons = require('consolidate');
 var path = require('path');
@@ -12,8 +12,8 @@ var mongoose = require('mongoose');
 
 /* Load credentials for https session */
 var credentials = {
-    key: fs.readFileSync( __dirname +'/cert/keys/server.key').toString(),
-    cert: fs.readFileSync( __dirname +'/cert/certs/server.crt').toString()
+    key: fs.readFileSync( __dirname +'/lib/cert/keys/server.key').toString(),
+    cert: fs.readFileSync( __dirname +'/lib/cert/certs/server.crt').toString()
 };
 
 /* Initialize Winston Logger */

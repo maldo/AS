@@ -5,15 +5,15 @@ var log = require('./log.js');
 var passport = require('passport');
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var co = require('./const');
-var config = require('../config/endpoints');
+var config = require('../lib/config/endpoints');
 
 var fs = require('fs');
 var https = require('https');
 
 // Self signed credentials
 var credentials = {
-    key: fs.readFileSync( __dirname +'/../cert/keys/server.key').toString(),
-    cert: fs.readFileSync( __dirname +'/../cert/certs/server.crt').toString()
+    key: fs.readFileSync( __dirname +'/../lib/cert/keys/server.key').toString(),
+    cert: fs.readFileSync( __dirname +'/../lib/cert/certs/server.crt').toString()
 };
 
 passport.use('AM', new OAuth2Strategy({
@@ -102,7 +102,7 @@ app.get('/oauth/AM/callback',
 	passport.authenticate('AM', { failureRedirect: '/fail' }),
 	function (req, res) {
 
-		log.debug('lo que llega es')(req.query);
+		//log.debug('lo que llega es')(req.query);
 		res.send(req.query);
 });
 
