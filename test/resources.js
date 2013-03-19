@@ -68,7 +68,7 @@ describe('Testing registered Resources', function () {
 
 		it('checks the registered resources and default policy \'All\'', function (done) {	
 			agent
-				.get(route.server+route.userPage)
+				.get(route.home)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -99,7 +99,7 @@ describe('Testing registered Resources', function () {
 
 		it('checks the policy change from \'All\' to \'+18\'', function (done) {	
 			agent
-				.get(route.server+route.userPage)
+				.get(route.home)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);

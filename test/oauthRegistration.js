@@ -247,12 +247,11 @@ describe('Register a Resource', function (){
 		done();
 	});
 
-
-	it ('registers a resource in to the AM', function (done) {
+	it ('registers a resource in to the AS', function (done) {
 		
-		co.rid = Math.round(Math.random() * 1000000);
+		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
-			.put('https://localhost:8443/AM/uma/rsreg/resource_set/'+co.rid)
+			.put(route.server+'/uma/rsreg/resource_set/'+co.rid)
 			//.set('Content-Type', 'application/intro-resource-set+json')
 			.set('Content-Type', 'application/json')
 			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
@@ -270,11 +269,12 @@ describe('Register a Resource', function (){
 					
 					var headerAnswer = 'application/intro-status+json';
 					res.header.should.have.property('content-type').that.contain(headerAnswer);
-
+					res.statusCode.should.be.equal(201);
 					var resp = JSON.parse(resData);
 					//log.debug('response')(resp);
 					resp.status.should.be.equal('created');
 					resp._id.should.be.equal(co.rid);
+					should.exist(resp._rev);
 					done();
 				});
 			});
@@ -284,8 +284,8 @@ describe('Register a Resource', function (){
 		
 		var id = Math.round(Math.random() * 1000000);
 		agent
-			.put('https://localhost:8443/AM/uma/rsreg/resource_set/'+id)
-			// TODO .set('Content-Type', 'application/intro-resource-set+json')
+			.put(route.server+'/uma/rsreg/resource_set/'+id)
+			//.set('Content-Type', 'application/intro-resource-set+json')
 			.set('Content-Type', 'application/json')
 			.set('Authorization', 'Bearer invalid')
 			.send({name:"testingEjemploMocha"+id+".jpg"})
@@ -293,10 +293,10 @@ describe('Register a Resource', function (){
 			.send({scopes:["http://localhost:8080/scopes/view"]})
 			.end(function (req, res){
 
-				// En la solucion este caso no esta contemplado
-				false.should.be.true;
+				res.should.have.property('statusCode').that.equals(401);
+				var error = 'Bearer realm=\"Users\", error=\"invalid_token\", error_description=\"Wrong access token\"';
+				res.header['www-authenticate'].should.have.string(error);
 				done();
 			});
 	});
-
 });
