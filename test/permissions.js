@@ -20,11 +20,8 @@ describe('Test the Registration and Requests of Permission', function(){
 	//y mails con la lista de mails
 
 	it('registers a permission and gets a ticket', function (done) {
-
-		//console.log(co.ACCESSTOKEN);
-
 		agent
-			.post('https://localhost:8443/AM/uma/preg/host/scope_reg_uri/Juma+Host')
+			.post(route.server + '/uma/preg/host/scope_reg_uri/'+co.CLIENT_ID)
 			.set('Content-Type', 'application/json')
 			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
 			.send({resource_set_id: co.rid})
@@ -32,11 +29,14 @@ describe('Test the Registration and Requests of Permission', function(){
 			.end(function (req,res) {
 
 				//log.debug('res')(res.body);
+				res.should.have.property('statusCode').that.is.equal(201);
+				should.exist(res.body);
+				res.body.should.have.property('ticket').that.is.not.empty;
+				co.TICKET = res.body.ticket;
 
-				should.exist(res.text);
-				var resson = JSON.parse(res.text);
-				resson.should.have.property('ticket').that.is.not.empty;
-				co.TICKET = resson.ticket;
+				var location = route.server + '/uma/preg/host/scope_reg_uri/'+co.CLIENT_ID+'/'+co.rid;
+
+				res.headers.should.have.property('location').that.is.equal(location);
 
 				done();
 			});
@@ -44,7 +44,7 @@ describe('Test the Registration and Requests of Permission', function(){
 
 	it('requests a permission with valid rpt and ticket', function (done){
 		agent
-			.post('https://localhost:8443/AM/uma/preq')
+			.post(route.server + '/uma/preq')
 			.set('Content-Type', 'application/json')
 			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
 			.send({rpt: co.RPT})
