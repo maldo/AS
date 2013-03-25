@@ -59,7 +59,7 @@ describe('Test the Registration and Requests of Permission', function(){
 
 	it('requests a permission with valid rpt and invalid ticket', function (done){
 		agent
-			.post('https://localhost:8443/AM/uma/preq')
+			.post(route.server + '/uma/preq')
 			.set('Content-Type', 'application/json')
 			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
 			.send({rpt: co.RPT})
