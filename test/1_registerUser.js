@@ -43,6 +43,9 @@ describe('Register a new User test:', function () {
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
 				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1911})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -58,6 +61,9 @@ describe('Register a new User test:', function () {
 				.send({email : 'This is not an email'})
 				.send({password : co.PASSWORD})
 				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1911})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -73,6 +79,9 @@ describe('Register a new User test:', function () {
 				.send({email : co.EMAIL})
 				.send({password : 1})
 				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1911})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -80,6 +89,61 @@ describe('Register a new User test:', function () {
 					done();
 				});
 		});
+
+		it('should not register a user with an invalid day', function (done){
+			agent
+				.post(route.signup)
+				.send({name: co.NAME})
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
+				.send({gender: 'male'})
+				.send({day: 39})
+				.send({month: 11})
+				.send({year: 1911})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please provide valid day');
+					done();
+				});
+		});
+
+		it('should not register a user with an invalid month', function (done){
+			agent
+				.post(route.signup)
+				.send({name: co.NAME})
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
+				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 88})
+				.send({year: 1911})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please provide valid month');
+					done();
+				});
+		});
+
+		it('should not register a user with an invalid year', function (done){
+			agent
+				.post(route.signup)
+				.send({name: co.NAME})
+				.send({email : co.EMAIL})
+				.send({password : co.PASSWORD})
+				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1711})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text').that.contain('Please provide valid year');
+					done();
+				});
+		});
+
 	});
 
 	describe('Register a new User', function () {
@@ -91,6 +155,9 @@ describe('Register a new User test:', function () {
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
 				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1911})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -107,6 +174,9 @@ describe('Register a new User test:', function () {
 				.send({email : co.EMAIL})
 				.send({password : co.PASSWORD})
 				.send({gender: 'male'})
+				.send({day: 10})
+				.send({month: 11})
+				.send({year: 1911})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
