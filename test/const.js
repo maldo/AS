@@ -8,7 +8,7 @@ exports.PORT = PORT;
 module.exports.RPT;
 module.exports.CLIENT_ID;
 module.exports.CLIENT_SECRET;
-module.exports.EMAIL = 'john@a-team.com'
+module.exports.EMAIL = 'john@a-team.org'
 module.exports.PASSWORD = '@aA12345';
 module.exports.NAME = 'John Smith';
 module.exports.CLIENT = 'A-TEAM';
