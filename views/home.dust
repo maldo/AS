@@ -31,88 +31,26 @@
 {/navbar}
 
 {<mainContent}
-    <!-- Main hero unit for a primary marketing message or call to action -->
-    <div class="hero-unit">
-        <h1>
-            {#user}
-                Welcome, {name}
-            {/user}
-        </h1>
-        <p>Control your resources in different servers.</p>
-    </div>
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div class="hero-unit">
+		<h1>
+			{#user}
+				Welcome, {name}
+			{/user}
+		</h1>
+		<p>Control your resources in different servers.</p>
+	</div>
 {/mainContent}
 
 {<rows}
 	<h3>Select a client to see your resources</h3>
 	
-	<form class="form-inline" method="POST" action="/home">
-		<select name="client">
-			{#user}
-				{#regClients}
-					<option value={_id}> {name}</option>{~n}
-				{/regClients}
-			{/user}
-		</select>
-		<button type="submit" class="btn"><i class="icon-refresh"></i></button>
-	</form>
+	{#user}			
+		{#regClients}
+			<ul>
+				<li><a href="/home/{name}">{name}</a></li>{~n}
+			</ul>
+		{/regClients}
 
-	{#resource}
-		<table class="table table-hover">
-			<thead>
-				<tr>
-				<th>Resource</th>
-				<th>ID</th>
-				<th>Privacy</th>
-				<th>Visits</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#resources}
-				<tr onclick="input" data-toggle="modal" href="#myModal" data-toggle="modal">
-					<td>{desc.name}</td>
-					<td>{rsid}</td>
-					<td>{privacy}</td>
-					<td>visitas?</td>
-				</tr> 
-
-				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Resource</h3>
-					</div>
-					<div class="modal-body">
-						<ul>
-							<li><strong>Name of the resource:</strong> {desc.name}</li>
-							<li><strong>Id of the resource:</strong> {rsid}</li>
-							<li><strong>Privacy:</strong> {privacy}</li>
-						</ul>
-
-						<form class="form-horizontal" method="POST" action="/home/{rsid}" id="myForm">
-							<p>Change privacy:</p>
-							<div class="control-group">
-								<label class="radio">
-								<input type="radio" name="privacy" value="All">
-								All
-							</label>
-							<label class="radio">
-								<input type="radio" name="privacy" value="+18">
-								+18
-							</label>
-							<label class="radio">
-								<input type="radio" name="privacy" value="Selected emails">
-								Selected emails
-							</label>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-						<button class="btn btn-primary" form="myForm">Save changes</button>
-					</div>
-				</div>
-				{~n}
-				{/resources}
-			</tbody>
-		</table>
-	{/resource}
+	{/user}
 {/rows}
