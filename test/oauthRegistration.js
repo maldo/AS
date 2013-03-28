@@ -280,6 +280,72 @@ describe('Register a Resource', function (){
 			});
 	});
 
+	it ('registers a resource in to the AS', function (done) {
+		
+		co.rid = Math.round(Math.random() * 1000000).toString();
+		agent
+			.put(route.server+'/uma/rsreg/resource_set/'+co.rid)
+			//.set('Content-Type', 'application/intro-resource-set+json')
+			.set('Content-Type', 'application/json')
+			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
+			.send({name:"testingEjemploMocha"+co.rid+".jpg"})
+			.send({icon_uri:"http://localhost:8080/icons/album.png"})
+			.send({scopes:["http://localhost:8080/scopes/view"]})
+			.end(function (req, res){
+
+				var resData='';
+				res.on('data', function(chunk) {
+					resData += chunk;
+				});
+
+				res.on('end', function() {
+					
+					var headerAnswer = 'application/intro-status+json';
+					res.header.should.have.property('content-type').that.contain(headerAnswer);
+					res.statusCode.should.be.equal(201);
+					var resp = JSON.parse(resData);
+					//log.debug('response')(resp);
+					resp.status.should.be.equal('created');
+					resp._id.should.be.equal(co.rid);
+					should.exist(resp._rev);
+					done();
+				});
+			});
+	});
+
+	it ('registers a resource in to the AS', function (done) {
+		
+		co.rid = Math.round(Math.random() * 1000000).toString();
+		agent
+			.put(route.server+'/uma/rsreg/resource_set/'+co.rid)
+			//.set('Content-Type', 'application/intro-resource-set+json')
+			.set('Content-Type', 'application/json')
+			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
+			.send({name:"testingEjemploMocha"+co.rid+".jpg"})
+			.send({icon_uri:"http://localhost:8080/icons/album.png"})
+			.send({scopes:["http://localhost:8080/scopes/view"]})
+			.end(function (req, res){
+
+				var resData='';
+				res.on('data', function(chunk) {
+					resData += chunk;
+				});
+
+				res.on('end', function() {
+					
+					var headerAnswer = 'application/intro-status+json';
+					res.header.should.have.property('content-type').that.contain(headerAnswer);
+					res.statusCode.should.be.equal(201);
+					var resp = JSON.parse(resData);
+					//log.debug('response')(resp);
+					resp.status.should.be.equal('created');
+					resp._id.should.be.equal(co.rid);
+					should.exist(resp._rev);
+					done();
+				});
+			});
+	});
+
 	it ('tries to register a resource in to the AM invalid token', function (done) {
 		
 		var id = Math.round(Math.random() * 1000000);
