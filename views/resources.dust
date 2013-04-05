@@ -76,7 +76,7 @@
 							<li><strong>Privacy:</strong> {privacy}</li>
 						</ul>
 
-						<form class="form-horizontal" method="POST" action="/home/{server}/{rsid}" id="Form{rsid}">
+						<form id="Form{rsid}" class="form-horizontal" method="POST" action="/home/{server}/{rsid}" >
 							<p>Change privacy:</p>
 							<div class="control-group">
 								<label class="radio">
@@ -88,11 +88,21 @@
 								+18
 							</label>
 							<label class="radio">
-								<input type="radio" name="privacy" value="Selected emails">
+								<input id="watch-me" type="radio" name="privacy" value="Selected emails">
 								Selected emails
 							</label>
 							</div>
+							<div id='show-me' style='display:none'>Hello</div>
 						</form>
+						<script>
+							$('#Form{rsid}').change(function() {
+								if ($('#watch-me').prop('checked')) {
+									$('#show-me').show();
+								} else {
+									$('#show-me').hide();
+								}
+							});
+						</script>
 					</div>
 					<div class="modal-footer">
 						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -100,6 +110,8 @@
 					</div>
 				</div>
 				{~n}
+	
+
 				{/resources}
 			</tbody>
 		</table>
