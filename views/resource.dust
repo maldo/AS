@@ -34,29 +34,67 @@
 {/mainContent}
 
 {<rows}
-	<h3>Resources from {server}</h3>
+
+	<div class="page-header">
+		<h3>Resources from <a href="/home/{server}">{server}</a></h3>
+	</div>
 	
 {#resource}
-		<table class="table table-hover">
-			<thead>
-				<tr>
-				<th>Resource</th>
-				<th>ID</th>
-				<th>Privacy</th>
-				<th>Visits</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#resources}
-					<tr onclick='javascript:window.location = "{server}/{rsid}"'>
-						<td>{desc.name}</td>
-						<td>{rsid}</td>
-						<td>{privacy}</td>
-						<td>visitas?</td>
-					</tr> 
-					{~n}
-				{/resources}
-			</tbody>
-		</table>
-	{/resource}
+
+<div class="container">
+	<div class="content">
+		<div class="row-fluid">
+			<div class="span5">
+
+				<ul>
+					<li><p><strong>Name of the resource:</strong> {desc.name}</p></li>
+					<li><p><strong>Id of the resource:</strong> {rsid}</p></li>
+					<li><p><strong>Privacy:</strong> {privacy}</p></li>
+				</ul>
+
+				<form class="form-horizontal" id="form" action="/" method="post">
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input type="radio" name="privacy" value="All">
+							All
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input type="radio" name="privacy" value="+18">
+							+18
+							</label>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input id="watch-me" type="radio" name="privacy" value="Selected emails">
+							Selected emails
+							</label>
+						<button type="submit" class="btn">Sign in</button>
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+	
+	<script>
+		$('#form').change(function() {
+			if ($('#watch-me').prop('checked')) {
+				$('#show-me').show();
+			} else {
+				$('#show-me').hide();
+			}
+		});
+	</script>
+{/resource}
 {/rows}
