@@ -52,7 +52,8 @@
 					<li><p><strong>Privacy:</strong> {privacy}</p></li>
 				</ul>
 
-				<form class="form-horizontal" id="form" action="/" method="post">
+				<form class="form-horizontal" id="form" action="/home/{server}/{rsid}" method="post">
+					<legend></legend>
 					<div class="control-group">
 						<div class="controls">
 							<label class="radio">
@@ -76,25 +77,33 @@
 							<input id="watch-me" type="radio" name="privacy" value="Selected emails">
 							Selected emails
 							</label>
-						<button type="submit" class="btn">Sign in</button>
+
+							<div id="show-me" style="display:none">
+								<p>Insert the emails who are allowed to access to the resource. Separated by commas</p>
+								<textarea rows="5" name="emails"></textarea>
+							</div>					
+
+							<!---<div id='show-me' style='display:none'>Hello</div>-->
+						<br/>
+						<a href="/home/{server}" class="btn btn-inverse">Go back!</a>  
+
+						<button type="submit" class="btn btn-success">Save changes</button>
 						</div>
 					</div>
 				</form>
-
+				<script>
+					$('#form').change(function() {
+						if ($('#watch-me').prop('checked')) {
+							$('#show-me').show();
+						} else {
+							$('#show-me').hide();
+						}
+					});
+				</script>
 
 			</div>
 		</div>
 	</div>
 </div>
-	
-	<script>
-		$('#form').change(function() {
-			if ($('#watch-me').prop('checked')) {
-				$('#show-me').show();
-			} else {
-				$('#show-me').hide();
-			}
-		});
-	</script>
 {/resource}
 {/rows}
