@@ -48,7 +48,7 @@
 			</thead>
 			<tbody>
 				{#resources}
-					<tr onclick='javascript:window.location = "{server}/{rsid}"'>
+					<tr onclick='javascript:window.location = "/home/{server}/{rsid}"'>
 						<td>{desc.name}</td>
 						<td>{rsid}</td>
 						<td>{privacy}</td>
