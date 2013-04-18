@@ -45,11 +45,11 @@
 	<div class="content">
 		<div class="row-fluid">
 			<div class="span5">
-
 				<ul>
 					<li><p><strong>Name of the resource:</strong> {desc.name}</p></li>
 					<li><p><strong>Id of the resource:</strong> {rsid}</p></li>
 					<li><p><strong>Privacy:</strong> {privacy}</p></li>
+					{#listEmail}<ul><li>{.}</li></ul>{/listEmail}
 				</ul>
 
 				<form class="form-horizontal" id="form" action="/home/{server}/{rsid}" method="post">
@@ -81,9 +81,7 @@
 							<div id="show-me" style="display:none">
 								<p>Insert the emails who are allowed to access to the resource. Separated by commas</p>
 								<textarea rows="5" name="emails"></textarea>
-							</div>					
-
-							<!---<div id='show-me' style='display:none'>Hello</div>-->
+							</div>
 						<br/>
 						<a href="/home/{server}" class="btn btn-inverse">Go back!</a>  
 
