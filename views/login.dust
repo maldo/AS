@@ -37,7 +37,7 @@
 				</div>
 
 				<div class="span4">
-					<h3>or Log in with</h3>
+					<h3>or</h3>
 					<p><a href="/loginGithub"><img src="/img/github.png" alt="Login with Github account"></a></p>
 				</div>
 			</div>
