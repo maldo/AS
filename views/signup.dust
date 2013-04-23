@@ -12,73 +12,87 @@
 			{dbkey}
 		</div>
 	{/dbkey}
+	<div class="container">
+		<div class="row">
+			<div class="span5">
+				<form class="form-horizontal" method="POST" action="/signup">
+					<div class="control-group">
+						<label class="control-label">Name:</label>
+							<div class="controls">
+								<input type="text" name="name"/>
+								{#name}
+									<span class="help-inline alert alert-error">{name}</span>
+								{/name}
+							</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Email:</label>
+						<div class="controls">
+							<input type="text" name="email"/>
+							{#email}
+								<span class="help-inline alert alert-error">{email}</span>
+							{/email}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label"> 
+							<a href="" rel="tooltip" title="Password should have:
+			* no white-space characters
+			* minimum length of 8
+			* makes sure there is at least:
+				+ one non-alpha character
+				+ one upper case character
+				+ one lower case character">
+								<i class="icon-info-sign"></i>
+							</a> Password:
+						</label>
+						<div class="controls">
+							<input type="password" name="password"/>
+							{#password}
+								<span class="help-inline alert alert-error">{password}</span>
+							{/password}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Birthday:</label>
+						<div class="controls">
+							<input type="number" class="input-mini inline" placeholder="Day" name="day">
+							<input type="number" class="input-mini inline" placeholder="Month" name="month">
+							<input type="number" class="input-mini inline" placeholder="Year" name="year">
+							{#date}
+								<span class="help-inline alert alert-error">{date}</span>
+							{/date}
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Gender:</label>
+						<div class="controls">
+							<label class="radio inline">
+			  					<input type="radio" name="gender" id="optionsRadios1" value="male" checked>
+			  							Male
+							</label>
+							<label class="radio inline">
+			 					 <input type="radio" name="gender" id="optionsRadios2" value="female">
+										Female
+							</label>
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Create</button>
+					</div>
+				</form>
+			</div>
+			<div class="span1" style="padding-right:20px; border-right: 10px solid #ccc;">
+				
+			</div>
 
-	<form class="form-horizontal" method="POST" action="/signup">
-		<div class="control-group">
-			<label class="control-label">Name:</label>
-				<div class="controls">
-					<input type="text" name="name"/>
-					{#name}
-						<span class="help-inline alert alert-error">{name}</span>
-					{/name}
-				</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Email:</label>
-			<div class="controls">
-				<input type="text" name="email"/>
-				{#email}
-					<span class="help-inline alert alert-error">{email}</span>
-				{/email}
+			<div class="span4">
+				<h3>or Log in with</h3>
+				<p><a href="/loginGithub"><img src="/img/github.png" alt="Login with Github account"></a></p>
 			</div>
+
 		</div>
-		<div class="control-group">
-			<label class="control-label"> 
-				<a href="" rel="tooltip" title="Password should have:
-* no white-space characters
-* minimum length of 8
-* makes sure there is at least:
-	+ one non-alpha character
-	+ one upper case character
-	+ one lower case character">
-					<i class="icon-info-sign"></i>
-				</a> Password:
-			</label>
-			<div class="controls">
-				<input type="password" name="password"/>
-				{#password}
-					<span class="help-inline alert alert-error">{password}</span>
-				{/password}
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Birthday:</label>
-			<div class="controls">
-				<input type="number" class="input-mini inline" placeholder="Day" name="day">
-				<input type="number" class="input-mini inline" placeholder="Month" name="month">
-				<input type="number" class="input-mini inline" placeholder="Year" name="year">
-				{#date}
-					<span class="help-inline alert alert-error">{date}</span>
-				{/date}
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Gender:</label>
-			<div class="controls">
-				<label class="radio inline">
-  					<input type="radio" name="gender" id="optionsRadios1" value="male" checked>
-  							Male
-				</label>
-				<label class="radio inline">
- 					 <input type="radio" name="gender" id="optionsRadios2" value="female">
-							Female
-				</label>
-			</div>
-		</div>
-		<div class="form-actions">
-			<button type="submit" class="btn btn-primary">Create</button>
-		</div>
-	</form>
+	</div>
 </div>
 
 {/mainContent}
