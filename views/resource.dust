@@ -1,0 +1,107 @@
+{>layout/}
+{<navbar}
+	<div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">Authotization Server</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="/home"><i class="icon-home"></i> Home</a></li>
+                            <li><a href="/account">Account</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                        <form class="divider-vertical navbar-form pull-right" method="post" action="/logout">
+                            <button type="submit" class="btn">Log out</button>
+                        </form>
+                        <ul class="nav pull-right">
+                            {#user}                 
+                                <li class="active"><a>{email}</a></li>
+                            {/user}
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+{/navbar}
+
+{<mainContent}
+{/mainContent}
+
+{<rows}
+
+	<div class="page-header">
+		<h3>Resources from <a href="/home/{server}">{server}</a></h3>
+	</div>
+	
+{#resource}
+
+<div class="container">
+	<div class="content">
+		<div class="row-fluid">
+			<div class="span5">
+				<ul>
+					<li><p><strong>Name of the resource:</strong> {desc.name}</p></li>
+					<li><p><strong>Id of the resource:</strong> {rsid}</p></li>
+					<li><p><strong>Privacy:</strong> {privacy}</p></li>
+					{#listEmail}<ul><li>{.}</li></ul>{/listEmail}
+				</ul>
+
+				<form class="form-horizontal" id="form" action="/home/{server}/{rsid}" method="post">
+					<legend></legend>
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input type="radio" name="privacy" value="All">
+							All
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input type="radio" name="privacy" value="+18">
+							+18
+							</label>
+						</div>
+					</div>
+
+					<div class="control-group">
+						<div class="controls">
+							<label class="radio">
+							<input id="watch-me" type="radio" name="privacy" value="Selected emails">
+							Selected emails
+							</label>
+
+							<div id="show-me" style="display:none">
+								<p>Insert the emails who are allowed to access to the resource. Separated by commas</p>
+								<textarea rows="5" name="emails"></textarea>
+							</div>
+						<br/>
+						<a href="/home/{server}" class="btn btn-inverse">Go back!</a>  
+
+						<button type="submit" class="btn btn-success">Save changes</button>
+						</div>
+					</div>
+				</form>
+				<script>
+					$('#form').change(function() {
+						if ($('#watch-me').prop('checked')) {
+							$('#show-me').show();
+						} else {
+							$('#show-me').hide();
+						}
+					});
+				</script>
+
+			</div>
+		</div>
+	</div>
+</div>
+{/resource}
+{/rows}

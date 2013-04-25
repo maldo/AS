@@ -31,15 +31,6 @@
 {/navbar}
 
 {<mainContent}
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit">
-		<h1>
-			{#user}
-				Welcome, {name}
-			{/user}
-		</h1>
-		<p>Control your resources in different servers.</p>
-	</div>
 {/mainContent}
 
 {<rows}
@@ -57,61 +48,13 @@
 			</thead>
 			<tbody>
 				{#resources}
-				<tr onclick="input" data-toggle="modal" href="#Modal{rsid}" data-toggle="modal">
-					<td>{desc.name}</td>
-					<td>{rsid}</td>
-					<td>{privacy}</td>
-					<td>visitas?</td>
-				</tr> 
-
-				<div id="Modal{rsid}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h3 id="myModalLabel">Resource</h3>
-					</div>
-					<div class="modal-body">
-						<ul>
-							<li><strong>Name of the resource:</strong> {desc.name}</li>
-							<li><strong>Id of the resource:</strong> {rsid}</li>
-							<li><strong>Privacy:</strong> {privacy}</li>
-						</ul>
-
-						<form id="Form{rsid}" class="form-horizontal" method="POST" action="/home/{server}/{rsid}" >
-							<p>Change privacy:</p>
-							<div class="control-group">
-								<label class="radio">
-								<input type="radio" name="privacy" value="All">
-								All
-							</label>
-							<label class="radio">
-								<input type="radio" name="privacy" value="+18">
-								+18
-							</label>
-							<label class="radio">
-								<input id="watch-me" type="radio" name="privacy" value="Selected emails">
-								Selected emails
-							</label>
-							</div>
-							<div id='show-me' style='display:none'>Hello</div>
-						</form>
-						<script>
-							$('#Form{rsid}').change(function() {
-								if ($('#watch-me').prop('checked')) {
-									$('#show-me').show();
-								} else {
-									$('#show-me').hide();
-								}
-							});
-						</script>
-					</div>
-					<div class="modal-footer">
-						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-						<button class="btn btn-primary" form="Form{rsid}">Save changes</button>
-					</div>
-				</div>
-				{~n}
-	
-
+					<tr onclick='javascript:window.location = "/home/{server}/{rsid}"'>
+						<td>{desc.name}</td>
+						<td>{rsid}</td>
+						<td>{privacy}</td>
+						<td>visitas?</td>
+					</tr> 
+					{~n}
 				{/resources}
 			</tbody>
 		</table>
