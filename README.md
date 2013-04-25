@@ -8,9 +8,3 @@ UMA protocol have two more pieces the Resource Server managed by the resource ow
 ##The server
 To execute the server remember to inicializate a Redis instance and a MongoDB one.
 	npm start
-
-
-
-
-
-
