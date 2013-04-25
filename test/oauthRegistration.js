@@ -280,7 +280,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('registers a resource2 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -313,7 +313,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('registers a resource3 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent

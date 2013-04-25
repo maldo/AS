@@ -68,21 +68,11 @@ describe('Test the Registration and Requests of Permission', function(){
 				//log.debug('res')(res.body);
 
 				res.should.have.property('statusCode').that.equals(400);
-				res.should.have.deep.property('header.content-type').that.contain('application/uma-status+json');
-
-				var resData='';
-				res.on('data', function(chunk) {
-					resData += chunk;
-				});
-
-				res.on('end', function() {
-					
-					var resp = JSON.parse(resData);
-					//log.debug('response')(resp);
-					resp.status.should.be.equal('error');
-					resp.error.should.be.equal('invalid_requester_ticket');
-					done();
-				});
+				res.should.have.deep.property('header.content-type').that.contain('application/json');
+	
+				res.body.status.should.be.equal('error');
+				res.body.error.should.be.equal('invalid_requester_ticket');
+				done();
 			});
 	})
 
