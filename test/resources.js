@@ -68,16 +68,16 @@ describe('Testing registered Resources', function () {
 
 		it('checks the registered resources and default policy \'All\'', function (done) {	
 			agent
-				.get(route.home)
+				.get(route.home+'/'+co.CLIENT)
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
+					//console.log(route.home+'/'+co.CLIENT)
 					res.should.have.property('statusCode').that.equals(200);
-					res['redirects'][0].should.have.string(route.server+route.userPage);
 					res.should.have.property('text');
-					res['text'].should.contain('example1@mail.com');
+					res['text'].should.contain(co.EMAIL);
 					res['text'].should.contain('Log out');
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
-					res['text'].should.contain('Resource Name');
+					res['text'].should.contain('Resource');
 					res['text'].should.contain('All');
 					done();
 				});
@@ -85,16 +85,21 @@ describe('Testing registered Resources', function () {
 
 		it('changes policy to \'+18\'', function (done) {	
 			
-			false.should.be.true;
-			done();
-			/*agent
-				.post('https://localhost:8443/AM/wicket/page?4-1.IBehaviorListener.0-radioform-apply')
-				.send('policy=2')
-				.send('apply=1')
+			agent
+				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
+				.send({privacy : "+18"})
 				.end(function (req, res) {
-					console.log(util.inspect(res));
+					//console.log(util.inspect(res));
+					//console.log(route.home+'/'+co.CLIENT+'/'+co.rid)
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text');
+					res['text'].should.contain(co.EMAIL);
+					res['text'].should.contain('Log out');
+					res['text'].should.contain('testingEjemploMocha'+co.rid);
+					res['text'].should.contain('Resource');
+					res['text'].should.contain('+18');
 					done();
-				});*/
+				});
 		});
 
 		it('checks the policy change from \'All\' to \'+18\'', function (done) {	
