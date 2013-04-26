@@ -33,7 +33,7 @@ describe('Register a new Client test:', function () {
 				        throw err;
 				        console.log(err);
 				    }else{
-				        console.log('saved!');
+				        //console.log('saved!');
 				        done();
 				    }
 				});

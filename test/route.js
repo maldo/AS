@@ -12,3 +12,4 @@ module.exports.clientSignup = this.server + '/client/signup';
 module.exports.clientLogin = this.server + '/client/login';
 module.exports.clientLogout = this.server + '/client/logout';
 module.exports.client = this.server + '/client';
+module.exports.decision = this.server + '/dialog/authorize/decision';
