@@ -2,7 +2,7 @@ var should = require('chai').should();
 var util = require('util');
 var route = require('./route');
 var superagent = require('superagent');
-var log = require('./log.js');
+var log = require('../lib/log.js');
 var co = require('./const');
 
 var agent;

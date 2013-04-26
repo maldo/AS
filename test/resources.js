@@ -51,7 +51,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('logins into the AM', function (done) {
+		it('logins into the AS', function (done) {
 			agent 
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -83,7 +83,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('changes policy to \'+18\'', function (done) {	
+		it('changes policy to \'+18\'', function (done) {
 			
 			agent
 				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
@@ -102,36 +102,55 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('checks the policy change from \'All\' to \'+18\'', function (done) {	
+		it('checks the policy change from \'+18\' to \'Selected Emails\'', function (done) {	
 			agent
-				.get(route.home)
+				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
+				.send({privacy : "Selected emails"})
+				.send({emails : "aaaa@bbbb.com"})
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
-					res['redirects'][0].should.have.string(route.server+route.userPage);
 					res.should.have.property('text');
-					res['text'].should.contain('example1@mail.com');
+					res['text'].should.contain('aaaa@bbbb.com');
 					res['text'].should.contain('Log out');
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
-					res['text'].should.contain('Resource Name');
-					res['text'].should.contain('+18');
+					res['text'].should.contain('Resource');
+					res['text'].should.contain('Selected emails');
 					done();
 				});
 		});
 
-		//https://localhost:8443/AM/wicket/page?3-1.IBehaviorListener.0-radioform-apply
+		it('checks the policy change from \'Selected Emails\' to \'All\'', function (done) {	
+			agent
+				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
+				.send({privacy : "All"})
+				.end(function (req, res) {
+					//console.log(util.inspect(res));
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text');
+					res['text'].should.contain('Log out');
+					res['text'].should.contain('testingEjemploMocha'+co.rid);
+					res['text'].should.contain('Resource');
+					res['text'].should.contain('All');
+					done();
+				});
+		});
 
 		it('checks the visits from one element', function (done) {	
-			false.should.be.true;
-			done();
-
-			/*agent
-				.get('')
+			agent
+				.get(route.home+'/'+co.CLIENT)
 				.end(function (req, res) {
-					//console.log(util.inspect(res.text));
-					false.should.be.true;
+					//console.log(util.inspect(res));
+					//console.log(route.home+'/'+co.CLIENT)
+					res.should.have.property('statusCode').that.equals(200);
+					res.should.have.property('text');
+					res['text'].should.contain(co.EMAIL);
+					res['text'].should.contain('Log out');
+					res['text'].should.contain('testingEjemploMocha'+co.rid);
+					res['text'].should.contain('Resource');
+					res['text'].should.contain('Visits');
 					done();
-				});*/
+				});
 		});
 	});
 });

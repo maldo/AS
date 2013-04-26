@@ -1,5 +1,4 @@
 var should = require('chai').should();
-var log = require('./log.js');
 var validate = require('../lib/validatorFields');
 
 describe('Test the Validation functions', function(){
