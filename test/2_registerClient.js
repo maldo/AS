@@ -141,7 +141,7 @@ describe('Register a new Client test:', function () {
 
 	describe('Register a new Client', function () {
 
-		it('registers a new Client into the AS', function (done) {
+		it('register a new Client into the AS', function (done) {
 			agent
 				.post(route.clientSignup)
 				.send({name: co.CLIENT})
@@ -158,7 +158,7 @@ describe('Register a new Client test:', function () {
 				});
 		});
 
-		it('fails to register a new user with a registered email', function (done) {
+		it('fail to register a new user with a registered email', function (done) {
 			agent
 				.post(route.clientSignup)
 				.send({name: co.CLIENT})

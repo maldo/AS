@@ -18,7 +18,7 @@ describe('Testing Oauth', function () {
 
 	describe('Testing AS server Oauth', function () {
 
-		it('gets the Oauth web page login of the AS server', function (done) {
+		it('get the Oauth web page login of the AS server', function (done) {
 			agent
 				.get(co.SERVER+'/oauth/AS')
 				.end(function (req, res) {
@@ -30,7 +30,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('gets the Oauth Allow/Deny web page of the AS server', function (done) {
+		it('get the Oauth Allow/Deny web page of the AS server', function (done) {
 			agent
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -51,7 +51,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('denies the access to the AS server and redirects you out', function (done){
+		it('deny the access to the AS server and redirects you out', function (done){
 			agent
 				.post(route.decision)
 				.send({transaction_id : tid})
@@ -66,12 +66,12 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('asks for the Oauth token PAT/AAT after denied access (shouldn\'t exist)', function () {
+		it ('ask for the Oauth token PAT/AAT after denied access (shouldn\'t exist)', function () {
 			//console.log(ACCESSTOKEN);
 			should.not.exist(co.ACCESSTOKEN);
 		});
 
-		it('gets the Oauth web page login of the AS server', function (done) {
+		it('get the Oauth web page login of the AS server', function (done) {
 			agent
 				.get(co.SERVER+'/oauth/AS')
 				.end(function (req, res) {
@@ -83,7 +83,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('gets the Oauth Allow/Deny web page of the AS server', function (done) {
+		it('get the Oauth Allow/Deny web page of the AS server', function (done) {
 			agent
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -104,7 +104,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('allows the access throw Oauth & gets the code', function (done){
+		it('allow the access throw Oauth & gets the code', function (done){
 			agent
 				.post(route.decision)
 				.send({transaction_id : tid})
@@ -122,7 +122,7 @@ describe('Testing Oauth', function () {
 		// codes invalidos y mismo code
 
 
-		it ('checks the Oauth token PAT/AAT', function (){
+		it ('check the Oauth token PAT/AAT', function (){
 			//console.log(co.ACCESSTOKEN);
 			should.exist(co.ACCESSTOKEN);
 		});
@@ -130,7 +130,7 @@ describe('Testing Oauth', function () {
 
 	describe('RPT Token', function () {
 
-		it ('gets the RPT ticket with an AAT', function (done){
+		it ('get the RPT ticket with an AAT', function (done){
 			agent 
 				.post(route.server+'/uma/rpt')
 				.set('Authorization', 'Bearer '+ co.ACCESSTOKEN)
@@ -147,7 +147,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('fails to get the RPT ticket, invalid accessToken', function (done){
+		it ('fail to get the RPT ticket, invalid accessToken', function (done){
 			agent
 				.post(route.server+'/uma/rpt')
 				.set('Authorization', 'Bearer invalid')
@@ -160,7 +160,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of a RPT', function (done){
+		it ('check the status of a RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -182,7 +182,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of a RPT with an invalid accessToken', function (done){
+		it ('check the status of a RPT with an invalid accessToken', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -198,7 +198,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of an invalid RPT', function (done){
+		it ('check the status of an invalid RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -218,7 +218,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of an RPT without RPT', function (done){
+		it ('check the status of an RPT without RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				//.set('Content-Type', 'application/json')
@@ -246,7 +246,7 @@ describe('Register a Resource', function (){
 		done();
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('register a resource in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -279,7 +279,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource2 in to the AS', function (done) {
+	it ('register a resource2 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -312,7 +312,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource3 in to the AS', function (done) {
+	it ('register a resource3 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -345,7 +345,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('tries to register a resource in to the AS providing an invalid accesstoken', function (done) {
+	it ('try to register a resource in to the AS providing an invalid accesstoken', function (done) {
 		
 		var id = Math.round(Math.random() * 1000000);
 		agent
@@ -365,7 +365,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('tries to register a resource in to the AS with no information', function (done) {
+	it ('try to register a resource in to the AS with no information', function (done) {
 		
 		var id = Math.round(Math.random() * 1000000);
 		agent

@@ -19,7 +19,7 @@ describe('Test the Registration and Requests of Permission', function(){
 	//example3 sin edad 
 	//y mails con la lista de mails
 
-	it('registers a permission and gets a ticket', function (done) {
+	it('register a permission and gets a ticket', function (done) {
 		agent
 			.post(route.server + '/uma/preg/host/scope_reg_uri/'+co.CLIENT_ID)
 			.set('Content-Type', 'application/json')
@@ -77,7 +77,7 @@ describe('Test the Registration and Requests of Permission', function(){
 	/*====================================================================*/
 	/*====================================================================*/
 
-	it('requests a permission with valid rpt and ticket', function (done){
+	it('request a permission with valid rpt and ticket', function (done){
 		agent
 			.post(route.server + '/uma/preq')
 			.set('Content-Type', 'application/json')
@@ -92,7 +92,7 @@ describe('Test the Registration and Requests of Permission', function(){
 			});
 	});
 
-	it('requests a permission with valid rpt and invalid ticket', function (done){
+	it('request a permission with valid rpt and invalid ticket', function (done){
 		agent
 			.post(route.server + '/uma/preq')
 			.set('Content-Type', 'application/json')
@@ -111,7 +111,7 @@ describe('Test the Registration and Requests of Permission', function(){
 			});
 	});
 
-	it ('requests a permission with an invalid accesstoken', function (done) {
+	it ('request a permission with an invalid accesstoken', function (done) {
 		agent
 			.post(route.server + '/uma/preq')
 			//.set('Content-Type', 'application/intro-resource-set+json')
@@ -128,7 +128,7 @@ describe('Test the Registration and Requests of Permission', function(){
 			});
 	});
 
-	it ('requests a permission with no information', function (done) {
+	it ('request a permission with no information', function (done) {
 		
 		var id = Math.round(Math.random() * 1000000);
 		agent

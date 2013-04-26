@@ -13,7 +13,7 @@ describe('Testing registered Resources', function () {
 	});
 
 	describe('GET the AS configuration', function () {
-		it('gets the AS endpoints configuration', function (done) {
+		it('get the AS endpoints configuration', function (done) {
 			agent
 				.get(route.ASconfig)
 				.end(function (req, res) {
@@ -51,7 +51,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('logins into the AS', function (done) {
+		it('login into the AS', function (done) {
 			agent 
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -66,7 +66,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('checks the registered resources and default policy \'All\'', function (done) {	
+		it('check the registered resources and default policy \'All\'', function (done) {	
 			agent
 				.get(route.home+'/'+co.CLIENT)
 				.end(function (req, res) {
@@ -83,7 +83,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('changes policy to \'+18\'', function (done) {
+		it('change policy to \'+18\'', function (done) {
 			
 			agent
 				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
@@ -102,7 +102,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('checks the policy change from \'+18\' to \'Selected Emails\'', function (done) {	
+		it('check the policy change from \'+18\' to \'Selected Emails\'', function (done) {	
 			agent
 				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
 				.send({privacy : "Selected emails"})
@@ -120,7 +120,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('checks the policy change from \'Selected Emails\' to \'All\'', function (done) {	
+		it('check the policy change from \'Selected Emails\' to \'All\'', function (done) {	
 			agent
 				.post(route.home+'/'+co.CLIENT+'/'+co.rid)
 				.send({privacy : "All"})
@@ -136,7 +136,7 @@ describe('Testing registered Resources', function () {
 				});
 		});
 
-		it('checks the visits from one element', function (done) {	
+		it('check the visits from one element', function (done) {	
 			agent
 				.get(route.home+'/'+co.CLIENT)
 				.end(function (req, res) {
