@@ -55,7 +55,7 @@ describe('Login \'Client:Password\' test:', function () {
 
 	describe('POST with a valid login', function () {
 
-		it('logins into the AM with a valid login', function (done) {
+		it('login into the AM with a valid login', function (done) {
 			agent
 				.post(route.clientLogin)
 				.send({email : co.EMAIL})
@@ -85,7 +85,7 @@ describe('Login \'Client:Password\' test:', function () {
 				});
 		});
 
-		it('stays inside a session after a login', function (done) {
+		it('stay inside a session after a login', function (done) {
 			agent
 				.get(route.client)
 				.end(function (req, res) {
@@ -108,7 +108,7 @@ describe('Login \'Client:Password\' test:', function () {
 				});
 		});
 
-		it('logs out', function (done) {
+		it('log out', function (done) {
 			agent
 				.post(route.clientLogout)
 				.send('')

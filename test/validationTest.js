@@ -1,10 +1,9 @@
 var should = require('chai').should();
-var log = require('./log.js');
 var validate = require('../lib/validatorFields');
 
-describe('Test the Validation functions', function(){
+describe('Test the Validation functions', function() {
 
-	it('tests the email validation', function () {
+	it('test the email validation', function () {
 		validate.email('This is not an email').should.be.false
 		validate.email('a@a').should.be.false
 		validate.email('a.com').should.be.false
@@ -20,7 +19,7 @@ describe('Test the Validation functions', function(){
 		validate.email('example@server.co.uk').should.be.true
 	});
 
-	it('tests the name validation', function (){
+	it('test the name validation', function () {
 		validate.name('').should.be.false
 		validate.name('a').should.be.false
 		validate.name('ab').should.be.false
@@ -33,7 +32,7 @@ describe('Test the Validation functions', function(){
 		validate.name('abcdefgh').should.be.true
 	})
 
-	it('test the password validation', function (){
+	it('test the password validation', function () {
 		validate.password('').should.be.false
 
 		validate.password('12345678').should.be.false
@@ -50,7 +49,7 @@ describe('Test the Validation functions', function(){
 		validate.password('@aA12345').should.be.true
 	})
 
-	it('test the URL validation', function (){
+	it('test the URL validation', function () {
 		validate.url('').should.be.false
 		validate.url('://www.safelayer.com').should.be.false
 		validate.url('ww.safelayer.com').should.be.false
@@ -77,6 +76,48 @@ describe('Test the Validation functions', function(){
 		validate.url('https://safelayer.com/page/').should.be.true
 		validate.url('https://safelayer.com/page/another').should.be.true
 		validate.url('https://safelayer.com/page/another:3000').should.be.true
+	})
+
+	it('test the Year validation', function () {
+		validate.year('').should.be.false
+		validate.year('1000').should.be.false
+		validate.year('3000').should.be.false
+		validate.year('1899').should.be.false
+		validate.year('2100').should.be.false
+		validate.year('0').should.be.false
+
+		validate.year('2013').should.be.true
+		validate.year('1900').should.be.true
+		validate.year('2099').should.be.true
+		validate.year('1992').should.be.true
+	})
+
+	it('test the Month validation', function () {
+		validate.month('').should.be.false
+		validate.month('13').should.be.false
+		validate.month('100').should.be.false
+		validate.month('0').should.be.false
+
+		validate.month('1').should.be.true
+		validate.month('9').should.be.true
+		validate.month('10').should.be.true
+		validate.month('12').should.be.true
+	})
+
+	it('test the Day validation', function () {
+		validate.day('').should.be.false
+		validate.day('32').should.be.false
+		validate.day('40').should.be.false
+		validate.day('100').should.be.false
+		validate.day('0').should.be.false
+
+		validate.day('1').should.be.true
+		validate.day('9').should.be.true
+		validate.day('10').should.be.true
+		validate.day('20').should.be.true
+		validate.day('29').should.be.true
+		validate.day('30').should.be.true
+		validate.day('31').should.be.true
 	})
 
 });

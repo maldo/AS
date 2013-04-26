@@ -2,7 +2,7 @@ var should = require('chai').should();
 var util = require('util');
 var route = require('./route');
 var superagent = require('superagent');
-var log = require('./log.js');
+var log = require('../lib/log.js');
 var co = require('./const');
 
 var agent;
@@ -16,11 +16,11 @@ describe('Testing Oauth', function () {
 		done();
 	});
 
-	describe('Testing AM server Oauth', function () {
+	describe('Testing AS server Oauth', function () {
 
-		it('gets the Oauth web page login of the AM server', function (done) {
+		it('get the Oauth web page login of the AS server', function (done) {
 			agent
-				.get(co.SERVER+'/oauth/AM')
+				.get(co.SERVER+'/oauth/AS')
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -30,7 +30,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
+		it('get the Oauth Allow/Deny web page of the AS server', function (done) {
 			agent
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -48,33 +48,32 @@ describe('Testing Oauth', function () {
 					res['text'].should.have.string('Deny');
 					res['text'].should.have.string('Log out');
 					done();
-
 				});
 		});
 
-		it('denies the access to the AM server and redirects you out', function (done){
+		it('deny the access to the AS server and redirects you out', function (done){
 			agent
-				.post('https://sasimi.safelayer.lan:9980/dialog/authorize/decision')
+				.post(route.decision)
 				.send({transaction_id : tid})
 				.send({cancel : "Deny"})
 				.end(function (req, res){
 					//log.debug('Response')(res);
 					should.exist(res['text']);
-					res.text.should.have.equal('You have denied access to the AM');
+					res.text.should.have.equal('You have denied access to the AS');
 					should.exist(res['redirects']);
 					res.redirects[res.redirects.length-1].should.include('/fail');
 					done();
 				});
 		});
 
-		it ('asks for the Oauth token PAT/AAT after denied access (shouldn\'t exist)', function () {
+		it ('ask for the Oauth token PAT/AAT after denied access (shouldn\'t exist)', function () {
 			//console.log(ACCESSTOKEN);
 			should.not.exist(co.ACCESSTOKEN);
 		});
 
-		it('gets the Oauth web page login of the AM server', function (done) {
+		it('get the Oauth web page login of the AS server', function (done) {
 			agent
-				.get(co.SERVER+'/oauth/AM')
+				.get(co.SERVER+'/oauth/AS')
 				.end(function (req, res) {
 					//console.log(util.inspect(res));
 					res.should.have.property('statusCode').that.equals(200);
@@ -84,7 +83,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('gets the Oauth Allow/Deny web page of the AM server', function (done) {
+		it('get the Oauth Allow/Deny web page of the AS server', function (done) {
 			agent
 				.post(route.login)
 				.send({email : co.EMAIL})
@@ -105,9 +104,9 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it('allows the access throw Oauth & gets the code', function (done){
+		it('allow the access throw Oauth & gets the code', function (done){
 			agent
-				.post('https://sasimi.safelayer.lan:9980/dialog/authorize/decision')
+				.post(route.decision)
 				.send({transaction_id : tid})
 				.end(function (req, res){
 					//log.debug('Response')(res);
@@ -123,7 +122,7 @@ describe('Testing Oauth', function () {
 		// codes invalidos y mismo code
 
 
-		it ('checks the Oauth token PAT/AAT', function (){
+		it ('check the Oauth token PAT/AAT', function (){
 			//console.log(co.ACCESSTOKEN);
 			should.exist(co.ACCESSTOKEN);
 		});
@@ -131,7 +130,7 @@ describe('Testing Oauth', function () {
 
 	describe('RPT Token', function () {
 
-		it ('gets the RPT ticket with an AAT', function (done){
+		it ('get the RPT ticket with an AAT', function (done){
 			agent 
 				.post(route.server+'/uma/rpt')
 				.set('Authorization', 'Bearer '+ co.ACCESSTOKEN)
@@ -148,7 +147,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('fails to get the RPT ticket, invalid accessToken', function (done){
+		it ('fail to get the RPT ticket, invalid accessToken', function (done){
 			agent
 				.post(route.server+'/uma/rpt')
 				.set('Authorization', 'Bearer invalid')
@@ -161,7 +160,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of a RPT', function (done){
+		it ('check the status of a RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -183,7 +182,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of a RPT with an invalid accessToken', function (done){
+		it ('check the status of a RPT with an invalid accessToken', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -199,7 +198,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of an invalid RPT', function (done){
+		it ('check the status of an invalid RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				.set('Content-Type', 'application/json')
@@ -219,7 +218,7 @@ describe('Testing Oauth', function () {
 				});
 		});
 
-		it ('checks the status of an RPT without RPT', function (done){
+		it ('check the status of an RPT without RPT', function (done){
 			agent
 				.post(route.server+'/uma/rptstat')
 				//.set('Content-Type', 'application/json')
@@ -247,7 +246,7 @@ describe('Register a Resource', function (){
 		done();
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('register a resource in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -280,7 +279,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('register a resource2 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -313,7 +312,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('registers a resource in to the AS', function (done) {
+	it ('register a resource3 in to the AS', function (done) {
 		
 		co.rid = Math.round(Math.random() * 1000000).toString();
 		agent
@@ -346,7 +345,7 @@ describe('Register a Resource', function (){
 			});
 	});
 
-	it ('tries to register a resource in to the AM invalid token', function (done) {
+	it ('try to register a resource in to the AS providing an invalid accesstoken', function (done) {
 		
 		var id = Math.round(Math.random() * 1000000);
 		agent
@@ -362,6 +361,23 @@ describe('Register a Resource', function (){
 				res.should.have.property('statusCode').that.equals(401);
 				var error = 'Bearer realm=\"Users\", error=\"invalid_token\", error_description=\"Wrong access token\"';
 				res.header['www-authenticate'].should.have.string(error);
+				done();
+			});
+	});
+
+	it ('try to register a resource in to the AS with no information', function (done) {
+		
+		var id = Math.round(Math.random() * 1000000);
+		agent
+			.put(route.server+'/uma/rsreg/resource_set/'+id)
+			//.set('Content-Type', 'application/intro-resource-set+json')
+			//.set('Content-Type', 'application/json')
+			.set('Authorization', 'Bearer ' + co.ACCESSTOKEN)
+			.end(function (req, res){
+				//console.log(res)
+				res.should.have.property('statusCode').that.equals(400);
+				res.header['cache-control'].should.have.string("no-store");
+				res.body.should.have.property('valid').that.is.false;
 				done();
 			});
 	});
