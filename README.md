@@ -7,4 +7,11 @@ UMA protocol have two more pieces the Resource Server managed by the resource ow
 
 ##The server
 To execute the server remember to inicializate a Redis instance and a MongoDB one.
+
 	npm start
+
+That it translates into:
+
+	node app.js
+
+If you want to configure the AS, you need to modify the config file, where all the config variables are defined.
