@@ -16,9 +16,9 @@ That it translates into:
 
 If you want to configure the AS, you need to modify the config file, where all the config variables are defined.
 There you can configure:
-* MongoDB
-* Redis
-* Application Options, like cluster, port or ip 
-* Security
-* Github id
-* Winston logger configuration
+- MongoDB
+- Redis
+- Application Options, like cluster, port or ip 
+- Security
+- Github id
+- Winston logger configuration
