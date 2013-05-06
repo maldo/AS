@@ -1,6 +1,6 @@
 {
   "name": "AS",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Authorization Server",
   "main": "app.js",
   "scripts": {
@@ -32,8 +32,5 @@
     "superagent": "*",
     "zombie": "*",
     "passport-oauth": "*"
-  },
-  "engines": {
-    "node": "0.8.x"
   }
 }
