@@ -6,7 +6,7 @@ The AS is the key part of the UMA protocol. It's a central server where you can 
 UMA protocol have two more pieces the Resource Server managed by the resource owner and the Client Server managed by the Requesting Party.
 
 ##The server
-To execute the server, remember to inicializate a Redis instance and a MongoDB. The AS starts in cluster mode be default. You can start it with:
+To execute the server, remember to inicializate a Redis instance and a MongoDB. The AS starts in cluster mode and with http by default. You can start it with:
 
 	npm start
 
