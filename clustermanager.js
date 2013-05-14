@@ -1,4 +1,3 @@
-
 var childSpawn = function (numCPUs, childProcess) {
 	var cluster = require('cluster');
 

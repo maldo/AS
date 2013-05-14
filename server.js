@@ -1,6 +1,5 @@
 var express = require('express');
 var fs = require('fs');
-var https = require('https');
 var config = require('./lib/config/config');
 var dust = require('dustjs-linkedin');
 var cons = require('consolidate');
@@ -10,29 +9,23 @@ var passport = require('passport');
 var RedisStore = require('connect-redis')(express);
 var mongoose = require('mongoose');
 
-var create = function() {
-
-	/* Load credentials for https session */
-	var credentials = {
-	    key: fs.readFileSync( __dirname +'/lib/cert/keys/server.key').toString(),
-	    cert: fs.readFileSync( __dirname +'/lib/cert/certs/server.crt').toString()
-	};
+var create = function () {
 
 	/* Initialize Winston Logger */
 	var logger = module.exports = new (winston.Logger)({
-	  transports: [
-	    new (winston.transports.Console)({
-	      colorize: true
-	    })
-	  ],
-	  levels: config.winston.levels,
-	  colors: config.winston.colors
+		transports: [
+			new (winston.transports.Console)({
+				colorize: true
+			})
+		],
+		levels: config.winston.levels,
+		colors: config.winston.colors
 	});
 
 	/* MongoDB connection */
-	mongoose.connect(config.db.uri, function(err) {
-		if (err) return logger.error('Problem connecting with MongoDB on '+ config.db.uri+'\nError: '+err);
-		logger.info('MongoDB connected on '+ config.db.uri);
+	mongoose.connect(config.db.uri, function (err) {
+		if (err) return logger.error('Problem connecting with MongoDB on ' + config.db.uri + '\nError: ' + err);
+		logger.info('MongoDB connected on ' + config.db.uri);
 	});
 
 	var app = express();
@@ -52,7 +45,7 @@ var create = function() {
 					host: config.redis.host,
 					port: config.redis.port
 				}),
-			secret: 'that\'s a real secret' 
+			secret: 'that\'s a real secret'
 		}));
 
 		app.use(express.bodyParser());
@@ -73,11 +66,25 @@ var create = function() {
 		require(filePath)(app);
 	});
 
-	/* Https server creation*/
-	https.createServer(credentials, app).listen(config.app.port);
-	logger.info('Version '+ require('./package').version);
-	logger.info('Running on server '+ config.app.host);
-	logger.info('Listening on port '+ config.app.port);
-}
+	if (config.app.https) {
+		/* Load credentials for https session */
+		var credentials = {
+			key: fs.readFileSync( __dirname + '/lib/cert/keys/server.key').toString(),
+			cert: fs.readFileSync( __dirname + '/lib/cert/certs/server.crt').toString()
+		};
+
+		/* Https server creation*/
+		require('https').createServer(credentials, app).listen(config.app.port);
+		logger.info('AS load with https');
+	} else {
+		app.listen(config.app.port);
+		logger.info('AS load with http');
+	}
+
+	logger.info('Version ' + require('./package').version);
+	logger.info('Running on server ' + config.app.host);
+	logger.info('Listening on port ' + config.app.port);
+	logger.info('PID ' + process.pid);
+};
 
 exports.create = create;
