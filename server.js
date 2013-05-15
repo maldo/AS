@@ -66,7 +66,7 @@ var create = function () {
 		require(filePath)(app);
 	});
 
-	if (config.app.https) {
+	if (config.app.protocol === 'https') {
 		/* Load credentials for https session */
 		var credentials = {
 			key: fs.readFileSync( __dirname + '/lib/cert/keys/server.key').toString(),
