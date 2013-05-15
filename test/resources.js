@@ -79,6 +79,7 @@ describe('Testing registered Resources', function () {
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
 					res['text'].should.contain('Resource');
 					res['text'].should.contain('All');
+					res['text'].should.contain('Visits');
 					done();
 				});
 		});
@@ -115,6 +116,7 @@ describe('Testing registered Resources', function () {
 					res['text'].should.contain('Log out');
 					res['text'].should.contain('testingEjemploMocha'+co.rid);
 					res['text'].should.contain('Resource');
+					res['text'].should.contain('Visits');
 					res['text'].should.contain('Selected emails');
 					done();
 				});
