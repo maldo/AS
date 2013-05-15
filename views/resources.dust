@@ -52,7 +52,7 @@
 						<td>{desc.name}</td>
 						<td>{rsid}</td>
 						<td>{privacy}</td>
-						<td>visitas?</td>
+						<td>{visits}</td>
 					</tr> 
 					{~n}
 				{/resources}
