@@ -1,6 +1,6 @@
 {
   "name": "AS",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Authorization Server",
   "main": "app.js",
   "scripts": {
