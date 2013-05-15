@@ -48,6 +48,7 @@
 				<ul>
 					<li><p><strong>Name of the resource:</strong> {desc.name}</p></li>
 					<li><p><strong>Id of the resource:</strong> {rsid}</p></li>
+					<li><p><strong>Visits:</strong> {visits}</p></li>
 					<li><p><strong>Privacy:</strong> {privacy}</p></li>
 					{#listEmail}<ul><li>{.}</li></ul>{/listEmail}
 				</ul>
